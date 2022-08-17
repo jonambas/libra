@@ -1,0 +1,85 @@
+import { mergeConfig, InlineConfig } from 'vite';
+import inspect from 'vite-plugin-inspect';
+import react from '@vitejs/plugin-react';
+import fg from 'fast-glob';
+import { resolve, relative } from 'path';
+import { libraPlugin } from './vitePluginLibra';
+import { htmlPlugin } from './vitePluginHtml';
+import type { LibraConfig } from './makeLibraConfig';
+
+export const makeViteConfig = async (
+  config: LibraConfig
+): Promise<Record<string, any>> => {
+  const {
+    backgrounds,
+    cwd,
+    dirname,
+    inspect: inspectEnabled,
+    layout,
+    mode,
+    open,
+    outDir,
+    port,
+    title,
+    viteConfig
+  } = config;
+
+  const entryPaths = await fg([
+    `${cwd}/**/*.libra.{ts,tsx,js,jsx}`,
+    '!**/node_modules/**'
+  ]);
+
+  const inspectPlugin = inspectEnabled ? [inspect()] : [];
+
+  const defaultConfig: InlineConfig = {
+    mode,
+    configFile: false,
+    root: dirname,
+    server: {
+      port,
+      open,
+      host: true,
+      fs: {
+        allow: [cwd, dirname]
+      }
+    },
+    preview: {
+      port,
+      open
+    },
+    build: {
+      outDir,
+      rollupOptions: {
+        input: {
+          main: resolve(dirname, 'index.html'),
+          preview: resolve(dirname, 'preview.html')
+        }
+      }
+    },
+    plugins: [libraPlugin(), react(), htmlPlugin(title), ...inspectPlugin],
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'ES2020'
+      },
+      force: true,
+      exclude: [...entryPaths, resolve(dirname, 'src/preview/defaultLayout.tsx')]
+    },
+    resolve: {
+      preserveSymlinks: true,
+      alias: {
+        libra: resolve(dirname, 'api'),
+        react: resolve(cwd, 'node_modules/react'),
+        __LIBRA_LAYOUT__: layout
+          ? resolve(cwd, layout)
+          : resolve(dirname, 'src/preview/defaultLayout.tsx')
+      }
+    },
+    define: {
+      __LIBRA__: JSON.stringify({ title, backgrounds, debug: inspectEnabled })
+    }
+  };
+
+  const userConfig = viteConfig ? viteConfig() : {};
+  const finalConfig = mergeConfig(defaultConfig, userConfig);
+  return finalConfig;
+};

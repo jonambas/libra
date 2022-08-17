@@ -1,0 +1,41 @@
+{
+  "name": "libra",
+  "version": "0.0.1",
+  "description": "",
+  "main": "api/index.ts",
+  "types": "api/index.d.ts",
+  "bin": "dist/cli.mjs",
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "build:w": "rimraf dist && rollup -c -w"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "jonambas",
+  "license": "MIT",
+  "dependencies": {
+    "@radix-ui/react-select": "^1.0.0",
+    "@stitches/react": "^1.2.8",
+    "@vitejs/plugin-react": "^2.0.1",
+    "classnames": "^2.3.1",
+    "commander": "^9.4.0",
+    "esbuild": "^0.15.2",
+    "fast-glob": "^3.2.11",
+    "framecast": "^0.0.3",
+    "nanoid": "^4.0.0",
+    "vite": "^3.0.7",
+    "vite-plugin-inspect": "^0.6.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@types/node": "^18.7.2",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.77.3",
+    "rollup-plugin-esbuild": "^4.9.1"
+  }
+}

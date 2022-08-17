@@ -1,0 +1,21 @@
+{
+  "include": ["lib/index.ts", "src", "api", "libra-env.d.ts"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES6",
+    "module": "ES2022",
+    "rootDir": ".",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "strict": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client", "vite"]
+  }
+}
