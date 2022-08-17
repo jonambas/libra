@@ -28,14 +28,14 @@
     "vite-plugin-inspect": "^0.6.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@types/node": "^18.7.2",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.77.3",
-    "rollup-plugin-esbuild": "^4.9.1"
+    "@rollup/plugin-commonjs": "22.0.2",
+    "@types/node": "18.7.2",
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "rimraf": "3.0.2",
+    "rollup": "2.77.3",
+    "rollup-plugin-esbuild": "4.9.1"
   }
 }
