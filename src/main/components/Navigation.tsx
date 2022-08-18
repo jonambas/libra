@@ -18,6 +18,11 @@ export const Navigation: FC = () => {
     return null;
   }
 
+  const empty = useMemo(
+    () => !searchChildrenEntries(entries, searchTerm),
+    [entries, searchTerm]
+  );
+
   return (
     <>
       <div
@@ -35,6 +40,9 @@ export const Navigation: FC = () => {
         />
       </div>
       <nav className={css({ height: '100%', overflow: 'auto', padding: '0 $3 $6' })()}>
+        {empty && (
+          <Text className={css({ fontSize: '$100', marginTop: '$2' })()}>No Results</Text>
+        )}
         {entries.map((entry, i) => {
           return <Item key={i} {...entry} searchTerm={searchTerm} />;
         })}
@@ -73,7 +81,6 @@ const searchChildrenEntries = (children: Array<any>, searchTerm: string): boolea
     }
 
     return false;
-    // return acc || child.name.includes(searchTerm);
   }, false);
 };
 

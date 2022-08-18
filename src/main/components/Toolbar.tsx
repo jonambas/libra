@@ -61,6 +61,7 @@ const Listbox: FC = () => {
 };
 
 export const Toolbar: FC = () => {
+  const { hideSidebar, toggleSidebar } = useContext(SettingsContext);
   return (
     <div
       className={css({
@@ -76,6 +77,9 @@ export const Toolbar: FC = () => {
           gap: '$2'
         })()}
       >
+        <div>
+          <Button onClick={toggleSidebar}>{hideSidebar ? 'Show' : 'Hide'} Sidebar</Button>
+        </div>
         <div>
           <Listbox />
         </div>

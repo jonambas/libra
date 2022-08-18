@@ -23,22 +23,37 @@ const globalStyles = globalCss({
 });
 
 const Index: FC = () => {
-  const { theme } = useContext(SettingsContext);
+  const { theme, hideSidebar } = useContext(SettingsContext);
 
   const wrapperClassNames = css({
     display: 'flex',
     minHeight: '100%'
   });
 
+  const sidebarHiddenClassNames = css({
+    width: '0',
+    overflow: 'hidden',
+    visibility: 'hidden',
+    '*': {
+      color: 'transparent !important'
+    }
+  });
+
   return (
     <div className={cx(wrapperClassNames(), theme === 'dark' && dark)}>
       <div
-        className={css({
-          display: 'flex',
-          flexDirection: 'column',
-          width: '200px',
-          background: '$background'
-        })()}
+        aria-hidden={hideSidebar ? 'true' : undefined}
+        tabIndex={hideSidebar ? -1 : undefined}
+        className={cx(
+          css({
+            display: 'flex',
+            flexDirection: 'column',
+            width: '200px',
+            background: '$background',
+            transition: '0.1s'
+          })(),
+          hideSidebar && sidebarHiddenClassNames()
+        )}
       >
         <Text
           as="h1"
