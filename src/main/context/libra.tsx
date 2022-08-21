@@ -3,15 +3,15 @@ import {
   FC,
   PropsWithChildren,
   RefObject,
+  useCallback,
   useLayoutEffect,
   useRef,
   useState
 } from 'react';
 import { Framecast } from 'framecast';
+import { useSearchParams } from 'react-router-dom';
 
 import type { GroupedEntry } from '../../../api/utils';
-
-const { debug } = __LIBRA__;
 
 type Context = {
   iframeRef?: RefObject<HTMLIFrameElement>;
@@ -27,17 +27,17 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [framecast, setFramecast] = useState<Framecast | null>(null);
   const [activeId, setActiveId] = useState<string>();
+  const [searchParams] = useSearchParams();
+  const theme = searchParams.get('theme');
 
   useLayoutEffect(() => {
     if (iframeRef.current) {
       const target = iframeRef.current.contentWindow;
+
       if (target) {
         const newFramecast = new Framecast(target);
         newFramecast.on('broadcast', ({ event, data }: any) => {
           if (event === 'libra-load') {
-            if (debug) {
-              console.log(`[libra] on ${event}`);
-            }
             setEntries(data);
           }
         });
@@ -50,12 +50,15 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
   }, [iframeRef.current]);
 
   const loadEntry = (id: string): void => {
-    if (debug) {
-      console.log(`[libra] broadcast libra-entry`);
-    }
-    framecast?.broadcast({ event: 'libra-entry', data: id });
     setActiveId(id);
   };
+
+  useLayoutEffect(() => {
+    framecast?.broadcast({
+      event: 'libra-entry',
+      data: { id: activeId, theme }
+    });
+  }, [theme, activeId]);
 
   return (
     <LibraContext.Provider

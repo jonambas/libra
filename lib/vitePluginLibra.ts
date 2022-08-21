@@ -31,12 +31,12 @@ export const libraPlugin = async (): Promise<Plugin> => {
         }
       });
     },
-    resolveId(id: any) {
+    resolveId(id: string) {
       if (id === virtualId) {
         return resolvedVirtualId;
       }
     },
-    load(id: any) {
+    load(id: string) {
       if (id === resolvedVirtualId) {
         return `
         import { instance } from 'libra';

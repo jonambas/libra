@@ -1,6 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 
-const DefaultLayout: FC<PropsWithChildren> = (props) => {
+const DefaultLayout: FC<PropsWithChildren<{ theme?: 'light' | 'dark' | 'system' }>> = (
+  props
+) => {
   if (!props.children) {
     return (
       <div
@@ -21,7 +23,12 @@ const DefaultLayout: FC<PropsWithChildren> = (props) => {
       </div>
     );
   }
-  return <div>{props.children}</div>;
+  return (
+    <div>
+      {props.children}
+      <div>theme: {props.theme}</div>
+    </div>
+  );
 };
 
 export default DefaultLayout;

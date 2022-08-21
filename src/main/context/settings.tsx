@@ -7,22 +7,24 @@ import {
   useState
 } from 'react';
 
-type Context = {
-  theme?: 'dark' | 'light' | 'system';
-  setTheme?: (theme: Context['theme']) => void;
-  hideSidebar?: boolean;
-  toggleSidebar?: () => void;
+type SettingsContext = {
+  themePreference: 'dark' | 'light' | 'system';
+  theme: 'dark' | 'light';
+  setTheme: (theme: SettingsContext['themePreference']) => void;
+  hideSidebar: boolean;
+  toggleSidebar: () => void;
 };
 
-export const SettingsContext = createContext<Context>({});
+export const SettingsContext = createContext<Partial<SettingsContext>>({});
 
 export const SettingsProvider: FC<PropsWithChildren> = (props) => {
-  const [themePreference, setThemePreference] = useState<Context['theme']>('system');
+  const [themePreference, setThemePreference] =
+    useState<SettingsContext['themePreference']>('system');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   const [hideSidebar, toggleSidebar] = useState<boolean>(false);
 
-  const handleSetTheme = (v: Context['theme']) => {
+  const handleSetTheme = (v: SettingsContext['themePreference']) => {
     setThemePreference(v);
   };
 
@@ -60,6 +62,7 @@ export const SettingsProvider: FC<PropsWithChildren> = (props) => {
     <SettingsContext.Provider
       value={{
         theme,
+        themePreference,
         setTheme: handleSetTheme,
         hideSidebar,
         toggleSidebar: () => toggleSidebar(!hideSidebar)

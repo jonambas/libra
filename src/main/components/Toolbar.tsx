@@ -1,9 +1,11 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useMemo } from 'react';
 import { Open } from '../icons';
-import { globalCss, css } from '../stiches';
+import { css } from '../stiches';
 import { SettingsContext } from '../context/settings';
+import { LibraContext } from '../context/libra';
 import * as Select from '@radix-ui/react-select';
-import { Button } from './Button';
+import { Button, ButtonLink } from './Button';
+import { useUrl } from '../hooks/useUrl';
 
 const contentClassName = css({
   background: '$background',
@@ -62,6 +64,8 @@ const Listbox: FC = () => {
 
 export const Toolbar: FC = () => {
   const { hideSidebar, toggleSidebar } = useContext(SettingsContext);
+  const url = useUrl({ preview: true });
+
   return (
     <div
       className={css({
@@ -83,18 +87,20 @@ export const Toolbar: FC = () => {
         <div>
           <Listbox />
         </div>
+
         <div>
-          <Button>Preview</Button>
+          <ButtonLink
+            href={url}
+            rel="noopener noreferrer"
+            target="_blank"
+            className={css({
+              display: 'inline-flex',
+              alignItems: 'center'
+            })()}
+          >
+            Preview iFrame <Open />
+          </ButtonLink>
         </div>
-        {/* <a
-          className={css({
-            display: 'inline-flex',
-            alignItems: 'center',
-            marginLeft: '$4'
-          })()}
-        >
-          <Open width="20" height="20" />
-        </a> */}
       </div>
     </div>
   );

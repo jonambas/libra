@@ -19,7 +19,7 @@ export const Iframe: FC = () => {
         })()}
         width="100%"
         height="100%"
-        src={`/preview.html`}
+        src="/preview.html"
         ref={iframeRef}
       />
     </div>

@@ -1,5 +1,12 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import cx from 'classnames';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useSearchParams
+} from 'react-router-dom';
 
 import { globalCss, css, dark } from './stiches';
 import { Navigation } from './components/Navigation';
@@ -14,16 +21,18 @@ const { title } = __LIBRA__;
 const globalStyles = globalCss({
   '*': { margin: 0, padding: 0, boxSizing: 'border-box' },
   html: {
-    fontFamily: '$sans',
-    background: '$background'
+    fontFamily: '$sans'
   },
   'html, body, #root': {
-    height: '100%'
+    height: '100%',
+    background: '$background'
   }
 });
 
 const Index: FC = () => {
-  const { theme, hideSidebar } = useContext(SettingsContext);
+  const { theme, themePreference, hideSidebar } = useContext(SettingsContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  globalStyles();
 
   const wrapperClassNames = css({
     display: 'flex',
@@ -33,14 +42,33 @@ const Index: FC = () => {
   const sidebarHiddenClassNames = css({
     width: '0',
     overflow: 'hidden',
-    visibility: 'hidden',
-    '*': {
-      color: 'transparent !important'
-    }
+    visibility: 'hidden'
   });
 
+  useEffect(() => {
+    // Updates query params when theme changes
+    if (themePreference) {
+      const entry = searchParams.get('entry');
+      setSearchParams(
+        new URLSearchParams({
+          ...(entry ? { entry } : {}),
+          theme: themePreference ?? ''
+        })
+      );
+    }
+
+    // Adds dark mode class name to HTML tag
+    if (theme === 'dark') {
+      document.documentElement.classList.add(dark);
+    } else {
+      document.documentElement.classList.remove(dark);
+    }
+  }, [theme, themePreference]);
+
+  useEffect(() => {});
+
   return (
-    <div className={cx(wrapperClassNames(), theme === 'dark' && dark)}>
+    <div className={cx(wrapperClassNames())}>
       <div
         aria-hidden={hideSidebar ? 'true' : undefined}
         tabIndex={hideSidebar ? -1 : undefined}
@@ -49,8 +77,7 @@ const Index: FC = () => {
             display: 'flex',
             flexDirection: 'column',
             width: '200px',
-            background: '$background',
-            transition: '0.1s'
+            transition: '0.07s'
           })(),
           hideSidebar && sidebarHiddenClassNames()
         )}
@@ -71,8 +98,7 @@ const Index: FC = () => {
         className={css({
           flex: '1',
           display: 'flex',
-          flexDirection: 'column',
-          background: '$background'
+          flexDirection: 'column'
         })()}
       >
         <Toolbar />
@@ -83,12 +109,21 @@ const Index: FC = () => {
 };
 
 export const App: FC = () => {
-  globalStyles();
   return (
-    <LibraProvider>
-      <SettingsProvider>
-        <Index />
-      </SettingsProvider>
-    </LibraProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <LibraProvider>
+              <SettingsProvider>
+                <Index />
+              </SettingsProvider>
+            </LibraProvider>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 };

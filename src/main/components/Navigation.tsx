@@ -1,10 +1,14 @@
 import { FC, MouseEventHandler, useCallback, useState, useContext, useMemo } from 'react';
 import cx from 'classnames';
+import { useSearchParams, Link } from 'react-router-dom';
+
 import { LibraContext } from '../context/libra';
 import { css, styled } from '../stiches';
 import { Folder } from '../icons';
 import { Text } from './Text';
 import { Input } from './Input';
+import { SettingsContext } from '../context/settings';
+import { useUrl } from '../hooks/useUrl';
 
 const searchableId = (id: string) => {
   return id.replace('__', ' ').replace('--', ' ').toLowerCase();
@@ -183,20 +187,12 @@ const FolderItem: FC<any> = (props) => {
 
 const EntryItem: FC<any> = (props) => {
   const { id, name, searchTerm } = props;
+  const { activeId, loadEntry } = useContext(LibraContext);
+  const url = useUrl({ id });
 
-  const { activeId } = useContext(LibraContext);
-
-  const { loadEntry } = useContext(LibraContext);
-  const origin = window.location.origin;
-
-  const handleClick = useCallback<MouseEventHandler<HTMLAnchorElement>>(
-    (e) => {
-      e.preventDefault();
-      window.history.pushState(null, '', `${origin}?entry=${id}`);
-      loadEntry && loadEntry(id);
-    },
-    [id]
-  );
+  const handleClick = useCallback<MouseEventHandler<HTMLAnchorElement>>(() => {
+    loadEntry && loadEntry(id);
+  }, [id]);
 
   if (searchTerm && !searchableId(id).includes(searchTerm)) {
     return null;
@@ -256,14 +252,14 @@ const EntryItem: FC<any> = (props) => {
 
   return (
     <div>
-      <a
+      <Link
+        to={url}
         className={cx(baseClassname, activeId === id && activeClassname)}
-        href={`${origin}?entry=${id}`}
         onClick={handleClick}
         title={name}
       >
         <Text as="span">{name}</Text>
-      </a>
+      </Link>
     </div>
   );
 };
