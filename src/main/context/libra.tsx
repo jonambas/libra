@@ -3,7 +3,7 @@ import {
   FC,
   PropsWithChildren,
   RefObject,
-  useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState
@@ -16,19 +16,26 @@ import type { GroupedEntry } from '../../../api/utils';
 type Context = {
   iframeRef?: RefObject<HTMLIFrameElement>;
   entries?: GroupedEntry[];
-  loadEntry?: (id: string) => void;
+  loadEntry?: (id?: string) => void;
   activeId?: string;
+  reloadEntry?: () => void;
+  ready?: boolean;
 };
 
 export const LibraContext = createContext<Context>({});
 
 export const LibraProvider: FC<PropsWithChildren> = (props) => {
+  const [searchParams] = useSearchParams();
+  const initialEntry = searchParams.get('entry');
+  const theme = searchParams.get('theme');
+  const themePreference = searchParams.get('themePreference');
+
   const [entries, setEntries] = useState<GroupedEntry[]>([]);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [framecast, setFramecast] = useState<Framecast | null>(null);
   const [activeId, setActiveId] = useState<string>();
-  const [searchParams] = useSearchParams();
-  const theme = searchParams.get('theme');
+  const [reload, setForceReload] = useState<boolean>(false);
+  const [ready, setReady] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     if (iframeRef.current) {
@@ -39,6 +46,7 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
         newFramecast.on('broadcast', ({ event, data }: any) => {
           if (event === 'libra-load') {
             setEntries(data);
+            setReady(true);
           }
         });
 
@@ -49,16 +57,33 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
     }
   }, [iframeRef.current]);
 
-  const loadEntry = (id: string): void => {
-    setActiveId(id);
+  const loadEntry = (id?: string): void => {
+    if (id) {
+      setActiveId(id);
+    }
   };
 
-  useLayoutEffect(() => {
+  const reloadEntry = (): void => {
+    setForceReload(!reload);
+  };
+
+  useEffect(() => {
+    // if (framecast && iframeRef.current) {
     framecast?.broadcast({
       event: 'libra-entry',
-      data: { id: activeId, theme }
+      data: { id: activeId, theme, themePreference }
     });
-  }, [theme, activeId]);
+    // }
+  }, [iframeRef.current, framecast, activeId, reload]);
+
+  // // Initial Load
+  useEffect(() => {
+    console.log(initialEntry, activeId);
+    // console.log(initialEntry && framecast && iframeRef.current && !activeId);
+    if (ready && initialEntry) {
+      loadEntry(initialEntry);
+    }
+  }, [ready]);
 
   return (
     <LibraContext.Provider
@@ -66,7 +91,9 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
         loadEntry,
         entries,
         iframeRef,
-        activeId
+        activeId,
+        reloadEntry,
+        ready
       }}
     >
       {props.children}

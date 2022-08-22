@@ -50,8 +50,8 @@ export const libraPlugin = async (): Promise<Plugin> => {
         })()
 
         if (import.meta.hot) {
-          import.meta.hot.accept(['${entryFsPaths.join("','")}'], () => {
-            instance.load();
+          import.meta.hot.accept(['${entryFsPaths.join("','")}'], (mod) => {
+            instance.reload();
           });
         }
         `;

@@ -2,9 +2,6 @@ import type { InlineConfig } from 'vite';
 import { slugify, group, GroupedEntry } from './utils';
 import { Framecast } from 'framecast';
 
-const target = window.parent;
-const framecast = new Framecast(target);
-
 export type Entry = {
   group: string;
   name: string;
@@ -31,10 +28,13 @@ class Libra {
   private static group: string;
   private static instance: Libra;
   public static entries: Array<GroupedEntry>;
+  private static framecast: any;
 
   private constructor() {
     Libra.source = {};
     Libra.group = prefix;
+    const target = window.parent;
+    Libra.framecast = new Framecast(target);
   }
 
   public static getInstance(): Libra {
@@ -102,14 +102,20 @@ class Libra {
   public load = (): void => {
     const entries = group(Libra.source, prefix);
     Libra.entries = entries;
-    // console.log(entries);
-    framecast.broadcast({ event: 'libra-load', data: entries });
 
+    Libra.framecast.broadcast({ event: 'libra-load', data: entries });
+    console.log('load', Libra.framecast);
     // Source is cleared after loading for subsequent HMR renders
     // This ensures entries arent duplicated
     // There is no pre-hmr hook so we use source to stage changes
     Libra.map = Libra.source;
     Libra.source = {};
+  };
+
+  public reload = () => {
+    const entries = group(Libra.source, prefix);
+    console.log('reload', Libra.framecast);
+    Libra.framecast.broadcast({ event: 'libra-hmr', data: entries });
   };
 
   public get = (id: string): Entry | undefined => {

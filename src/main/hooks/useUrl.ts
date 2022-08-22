@@ -8,19 +8,31 @@ interface UseUrlOptions {
   id?: string;
 }
 
+const filterObject = (obj: Record<string, any>) => {
+  return Object.keys(obj).reduce((acc, key) => {
+    if (Boolean(obj[key])) {
+      return { ...acc, [key]: obj[key] };
+    }
+    return acc;
+  }, {});
+};
+
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
   const { activeId } = useContext(LibraContext);
-  const { themePreference } = useContext(SettingsContext);
+  const { theme, themePreference } = useContext(SettingsContext);
 
   const params = useMemo(
     () =>
       createSearchParams(
-        new URLSearchParams({
-          ...(id || activeId ? { entry: id || activeId } : {}),
-          ...(themePreference ? { theme: themePreference } : {})
-        })
+        new URLSearchParams(
+          filterObject({
+            entry: id || activeId,
+            theme,
+            themePreference
+          })
+        )
       ),
-    [id, themePreference, activeId]
+    [id, theme, themePreference, activeId]
   );
 
   const path = preview ? '/preview.html' : '/';

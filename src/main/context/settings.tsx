@@ -3,9 +3,12 @@ import {
   FC,
   PropsWithChildren,
   useCallback,
+  useContext,
   useEffect,
   useState
 } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { LibraContext } from './libra';
 
 type SettingsContext = {
   themePreference: 'dark' | 'light' | 'system';
@@ -18,11 +21,48 @@ type SettingsContext = {
 export const SettingsContext = createContext<Partial<SettingsContext>>({});
 
 export const SettingsProvider: FC<PropsWithChildren> = (props) => {
+  const { activeId, reloadEntry } = useContext(LibraContext);
   const [themePreference, setThemePreference] =
-    useState<SettingsContext['themePreference']>('system');
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
+    useState<SettingsContext['themePreference']>();
+  const [theme, setTheme] = useState<SettingsContext['theme']>();
   const [hideSidebar, toggleSidebar] = useState<boolean>(false);
+  const [, setSearchParams] = useSearchParams();
+
+  // Initial Load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paramTheme = params.get('theme');
+    const paramThemePreference = params.get('themePreference');
+
+    if (paramTheme) {
+      setTheme(paramTheme as 'light' | 'dark');
+    }
+    if (paramThemePreference) {
+      setThemePreference(paramThemePreference as 'light' | 'dark' | 'system');
+    }
+  }, []);
+
+  // Updates query params when theme changes
+  useEffect(() => {
+    if (themePreference && theme && activeId) {
+      setSearchParams(
+        {
+          entry: activeId,
+          themePreference: themePreference,
+          theme: theme
+        },
+        { replace: true }
+      );
+      reloadEntry && reloadEntry();
+    }
+  }, [theme, themePreference]);
+
+  // useEffect(() => {
+  //   // if (loadEntry && activeId) {
+  //   //   // console.log(paramSettings.theme, paramSettings.themePreference);
+  //   //
+  //   // }
+  // }, [paramSettings.theme, paramSettings.themePreference]);
 
   const handleSetTheme = (v: SettingsContext['themePreference']) => {
     setThemePreference(v);

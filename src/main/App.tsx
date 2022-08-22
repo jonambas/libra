@@ -1,12 +1,6 @@
 import { FC, useContext, useEffect } from 'react';
 import cx from 'classnames';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useSearchParams
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { globalCss, css, dark } from './stiches';
 import { Navigation } from './components/Navigation';
@@ -31,7 +25,6 @@ const globalStyles = globalCss({
 
 const Index: FC = () => {
   const { theme, themePreference, hideSidebar } = useContext(SettingsContext);
-  const [searchParams, setSearchParams] = useSearchParams();
   globalStyles();
 
   const wrapperClassNames = css({
@@ -46,17 +39,6 @@ const Index: FC = () => {
   });
 
   useEffect(() => {
-    // Updates query params when theme changes
-    if (themePreference) {
-      const entry = searchParams.get('entry');
-      setSearchParams(
-        new URLSearchParams({
-          ...(entry ? { entry } : {}),
-          theme: themePreference ?? ''
-        })
-      );
-    }
-
     // Adds dark mode class name to HTML tag
     if (theme === 'dark') {
       document.documentElement.classList.add(dark);

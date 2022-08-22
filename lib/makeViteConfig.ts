@@ -2,7 +2,7 @@ import { mergeConfig, InlineConfig } from 'vite';
 import inspect from 'vite-plugin-inspect';
 import react from '@vitejs/plugin-react';
 import fg from 'fast-glob';
-import { resolve, relative } from 'path';
+import { resolve } from 'path';
 import { libraPlugin } from './vitePluginLibra';
 import { htmlPlugin } from './vitePluginHtml';
 import type { LibraConfig } from './makeLibraConfig';
