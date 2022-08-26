@@ -45,6 +45,7 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
         const newFramecast = new Framecast(target);
         newFramecast.on('broadcast', ({ event, data }: any) => {
           if (event === 'libra-load') {
+            // console.log(data);
             setEntries(data);
             setReady(true);
           }
@@ -68,18 +69,14 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
   };
 
   useEffect(() => {
-    // if (framecast && iframeRef.current) {
     framecast?.broadcast({
       event: 'libra-entry',
       data: { id: activeId, theme, themePreference }
     });
-    // }
   }, [iframeRef.current, framecast, activeId, reload]);
 
-  // // Initial Load
+  // Initial Load
   useEffect(() => {
-    console.log(initialEntry, activeId);
-    // console.log(initialEntry && framecast && iframeRef.current && !activeId);
     if (ready && initialEntry) {
       loadEntry(initialEntry);
     }

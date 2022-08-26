@@ -56,7 +56,7 @@ export const Navigation: FC = () => {
 };
 
 const FolderIcon = styled(Folder, {
-  transition: '0.1s',
+  transition: '0.08s',
   color: '$gray500',
   variants: {
     point: {
@@ -137,7 +137,7 @@ const Item: FC<any> = (props) => {
           borderRadius: '$sm',
           color: '$text',
           outline: 'none',
-          transition: '0.1s',
+          transition: '0.08s',
           '&:hover': {
             background: '$interactiveHoverBg',
             color: '$interactiveHoverText'
@@ -210,7 +210,7 @@ const EntryItem: FC<any> = (props) => {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    transition: '0.1s',
+    transition: '0.08s',
     outline: 'none',
     '&:hover': {
       background: '$interactiveHoverBg',
@@ -232,7 +232,7 @@ const EntryItem: FC<any> = (props) => {
       background: '$interactiveFocusBg',
       borderRadius: '$circle',
       opacity: '0',
-      transition: '0.1s'
+      transition: '0.08s'
     }
   })();
 

@@ -6,8 +6,6 @@ const DefaultLayout: FC<
     themePreference: 'light' | 'dark' | 'system';
   }>
 > = (props) => {
-  // console.log(props);
-
   const styles = {
     color:
       props.theme === 'light' ? 'black' : props.theme === 'dark' ? 'white' : undefined,

@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Framecast } from 'framecast';
+
+import { useLibraPreview } from './useLibraPreview';
+import { Boundary } from './error';
 import { instance } from '../../api';
 
 // User's layout
@@ -17,21 +19,17 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-const framecast = new Framecast(window.parent);
-
 const out = document.createElement('div');
 out.id = 'root';
 document.body.appendChild(out);
 
-type ThemePreference = 'light' | 'dark' | 'system';
-type Theme = 'light' | 'dark';
-type Options = {
+type EntryProps = {
   id?: string;
-  theme?: Theme;
-  themePreference?: ThemePreference;
+  theme?: 'light' | 'dark';
+  themePreference?: 'light' | 'dark' | 'system';
 };
 
-const App: FC<Options> = (props) => {
+const Entry: FC<EntryProps> = (props) => {
   const { id, theme, themePreference } = props;
 
   if (id) {
@@ -49,44 +47,15 @@ const App: FC<Options> = (props) => {
   return <Layout theme={theme} themePreference={themePreference} />;
 };
 
-const preview = ({ id, theme, themePreference }: Options = {}) => (
-  <App id={id} theme={theme} themePreference={themePreference} />
-);
+const Preview: FC = () => {
+  const preview = useLibraPreview();
+
+  return (
+    <Boundary theme={preview.theme}>
+      <Entry {...preview} />
+    </Boundary>
+  );
+};
 
 const root = createRoot(out);
-root.render(preview());
-
-framecast.on('broadcast', ({ event, data }: any) => {
-  console.log('broadcast', event);
-  // Updates when navigation is used
-  if (event === 'libra-entry') {
-    root.render(
-      preview({
-        id: data.id,
-        theme: data.theme,
-        themePreference: data.themePreference
-      })
-    );
-  }
-
-  // Handles HMR / initial load of solo iframe
-  if (event === 'libra-load') {
-    console.log('load preview');
-    const params = new URLSearchParams(window.location.search);
-    const entry = params.get('entry') ?? '';
-    // const theme = (params.get('theme') ?? 'light') as Theme;
-    // const themePreference = (params.get('themePreference') ??
-    //   'system') as ThemePreference;
-
-    // if (entry) {
-    // root.unmount();
-    root.render(
-      preview({
-        id: entry
-        // theme: theme,
-        // themePreference: themePreference
-      })
-    );
-    // }
-  }
-});
+root.render(<Preview />);

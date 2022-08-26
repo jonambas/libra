@@ -2,12 +2,29 @@ import type { InlineConfig } from 'vite';
 import { slugify, group, GroupedEntry } from './utils';
 import { Framecast } from 'framecast';
 
+const toParent = new Framecast(window.parent);
+const toPreview = new Framecast(window);
+
+// Gets the callsite or filename that a function is invoked
+// This feels a bit brittle but not sure how else to do this
+// We use this only for HMR, so we can dedupe entries
+const caller = (): string | undefined => {
+  return new Error().stack
+    ?.split('\n')
+    .filter((l) => l.includes('.libra.')) // Chromium and Safari stack traces are different
+    .shift()
+    ?.split('?')[0]
+    ?.split('/')
+    .pop();
+};
+
 export type Entry = {
   group: string;
   name: string;
   id: string;
   type: 'group' | 'entry';
   render?: () => JSX.Element;
+  caller?: string;
 };
 
 export interface Config {
@@ -27,15 +44,18 @@ class Libra {
   private static map: Record<string, Entry>;
   private static group: string;
   private static instance: Libra;
+
   public static entries: Array<GroupedEntry>;
-  private static framecast: any;
 
   private constructor() {
     Libra.source = {};
     Libra.group = prefix;
-    const target = window.parent;
-    Libra.framecast = new Framecast(target);
   }
+
+  private emit = (event: string, data?: any) => {
+    toParent.broadcast({ event, data });
+    toPreview.broadcast({ event, data });
+  };
 
   public static getInstance(): Libra {
     if (!Libra.instance) {
@@ -61,7 +81,8 @@ class Libra {
       id,
       name,
       render,
-      type: 'entry'
+      type: 'entry',
+      caller: caller()
     };
   };
 
@@ -80,13 +101,15 @@ class Libra {
       group: Libra.group,
       name,
       id,
-      type: 'group'
+      type: 'group',
+      caller: caller()
     };
     Libra.group = id;
 
     callback();
 
     const parts = Libra.group.split('__');
+
     if (parts.length > 1) {
       parts.pop();
       Libra.group = parts.join('__');
@@ -95,16 +118,11 @@ class Libra {
     }
   };
 
-  public getEntries = (): GroupedEntry[] => {
-    return Libra.entries;
-  };
-
   public load = (): void => {
     const entries = group(Libra.source, prefix);
     Libra.entries = entries;
+    this.emit('libra-load', entries);
 
-    Libra.framecast.broadcast({ event: 'libra-load', data: entries });
-    console.log('load', Libra.framecast);
     // Source is cleared after loading for subsequent HMR renders
     // This ensures entries arent duplicated
     // There is no pre-hmr hook so we use source to stage changes
@@ -112,10 +130,31 @@ class Libra {
     Libra.source = {};
   };
 
+  // Called on HMR
+  // Merges old entries with new entries
+  // and filters out entries with the same caller filename
+  // to dedupe the old entries
   public reload = () => {
-    const entries = group(Libra.source, prefix);
-    console.log('reload', Libra.framecast);
-    Libra.framecast.broadcast({ event: 'libra-hmr', data: entries });
+    const caller = Libra.source[Object.keys(Libra.source)[0]].caller;
+
+    if (!caller) {
+      window.location.reload(); // bail
+    }
+
+    const dedupedEntries = Object.keys(Libra.map).reduce((acc, key) => {
+      const thisCaller = Libra.map[key].caller;
+      if (thisCaller !== caller) {
+        return { ...acc, [key]: Libra.map[key] };
+      }
+      return acc;
+    }, {});
+
+    Libra.map = { ...dedupedEntries, ...Libra.source };
+    Libra.source = {};
+
+    const entries = group(Libra.map, prefix);
+    Libra.entries = entries;
+    this.emit('libra-load', entries);
   };
 
   public get = (id: string): Entry | undefined => {
@@ -130,7 +169,3 @@ export type Instance = Libra;
 export const instance = Libra.getInstance();
 export const add = instance.add;
 export const describe = instance.describe;
-
-if (import.meta.hot) {
-  import.meta.hot.accept();
-}

@@ -1,8 +1,7 @@
-import { FC, useContext, useMemo } from 'react';
+import { FC, useContext } from 'react';
 import { Open } from '../icons';
 import { css } from '../stiches';
 import { SettingsContext } from '../context/settings';
-import { LibraContext } from '../context/libra';
 import * as Select from '@radix-ui/react-select';
 import { Button, ButtonLink } from './Button';
 import { useUrl } from '../hooks/useUrl';
@@ -78,7 +77,7 @@ export const Toolbar: FC = () => {
           justifyContent: 'flex-end',
           alignItems: 'center',
           padding: '$3 0',
-          gap: '$2'
+          gap: '$0p5'
         })()}
       >
         <div>

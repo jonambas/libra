@@ -10,7 +10,7 @@ export const Input: FC<ComponentPropsWithoutRef<'input'>> = (props) => {
         background: '$background',
         border: '1px solid $interactiveBorder',
         borderRadius: '$sm',
-        transition: '0.1s',
+        transition: '0.08s',
         color: '$text',
         '&:hover': {
           background: '$interactiveBg'

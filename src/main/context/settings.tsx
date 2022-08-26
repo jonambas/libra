@@ -57,13 +57,6 @@ export const SettingsProvider: FC<PropsWithChildren> = (props) => {
     }
   }, [theme, themePreference]);
 
-  // useEffect(() => {
-  //   // if (loadEntry && activeId) {
-  //   //   // console.log(paramSettings.theme, paramSettings.themePreference);
-  //   //
-  //   // }
-  // }, [paramSettings.theme, paramSettings.themePreference]);
-
   const handleSetTheme = (v: SettingsContext['themePreference']) => {
     setThemePreference(v);
   };
