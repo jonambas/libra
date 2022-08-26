@@ -22,7 +22,7 @@
     "commander": "^9.4.0",
     "esbuild": "^0.15.2",
     "fast-glob": "^3.2.11",
-    "framecast": "^0.0.3",
+    "framecast": "^0.0.4",
     "react-router-dom": "^6.3.0",
     "vite": "^3.0.7",
     "vite-plugin-inspect": "^0.6.0"
