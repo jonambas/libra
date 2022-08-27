@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { globalCss, css, dark } from './stiches';
 import { Navigation } from './components/Navigation';
 import { Iframe } from './components/Iframe';
-import { LibraProvider } from './context/libra';
+import { LibraContext, LibraProvider } from './context/libra';
 import { SettingsProvider, SettingsContext } from './context/settings';
 import { Toolbar } from './components/Toolbar';
 import { Text } from './components/Text';
@@ -19,12 +19,14 @@ const globalStyles = globalCss({
   },
   'html, body, #root': {
     height: '100%',
-    background: '$background'
+    background: '$background',
+    transition: 'background 0.08s'
   }
 });
 
 const Index: FC = () => {
   const { theme, themePreference, hideSidebar } = useContext(SettingsContext);
+  const { ready } = useContext(LibraContext);
   globalStyles();
 
   const wrapperClassNames = css({
@@ -46,8 +48,6 @@ const Index: FC = () => {
       document.documentElement.classList.remove(dark);
     }
   }, [theme, themePreference]);
-
-  useEffect(() => {});
 
   return (
     <div className={cx(wrapperClassNames())}>
@@ -77,6 +77,7 @@ const Index: FC = () => {
         <Navigation />
       </div>
       <main
+        aria-hidden={ready ? 'false' : 'true'}
         className={css({
           flex: '1',
           display: 'flex',
@@ -86,6 +87,25 @@ const Index: FC = () => {
         <Toolbar />
         <Iframe />
       </main>
+      {!ready ? (
+        <div
+          className={css({
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            height: '100vh',
+            width: '100vw',
+            background: '$background',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '$100',
+            color: '$text'
+          })()}
+        >
+          Loading
+        </div>
+      ) : null}
     </div>
   );
 };

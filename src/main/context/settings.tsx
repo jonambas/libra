@@ -23,16 +23,16 @@ export const SettingsContext = createContext<Partial<SettingsContext>>({});
 export const SettingsProvider: FC<PropsWithChildren> = (props) => {
   const { activeId, reloadEntry } = useContext(LibraContext);
   const [themePreference, setThemePreference] =
-    useState<SettingsContext['themePreference']>();
-  const [theme, setTheme] = useState<SettingsContext['theme']>();
+    useState<SettingsContext['themePreference']>('system');
+  const [theme, setTheme] = useState<SettingsContext['theme']>('light');
   const [hideSidebar, toggleSidebar] = useState<boolean>(false);
   const [, setSearchParams] = useSearchParams();
 
   // Initial Load
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const paramTheme = params.get('theme');
-    const paramThemePreference = params.get('themePreference');
+    const paramTheme = params.get('theme') ?? 'light';
+    const paramThemePreference = params.get('themePreference') ?? 'system';
 
     if (paramTheme) {
       setTheme(paramTheme as 'light' | 'dark');
@@ -40,22 +40,27 @@ export const SettingsProvider: FC<PropsWithChildren> = (props) => {
     if (paramThemePreference) {
       setThemePreference(paramThemePreference as 'light' | 'dark' | 'system');
     }
+    setSearchParams(
+      {
+        themePreference: paramThemePreference,
+        theme: paramTheme
+      },
+      { replace: true }
+    );
   }, []);
 
   // Updates query params when theme changes
   useEffect(() => {
-    if (themePreference && theme && activeId) {
-      setSearchParams(
-        {
-          entry: activeId,
-          themePreference: themePreference,
-          theme: theme
-        },
-        { replace: true }
-      );
-      reloadEntry && reloadEntry();
-    }
-  }, [theme, themePreference]);
+    setSearchParams(
+      {
+        entry: activeId ?? '',
+        themePreference: themePreference,
+        theme: theme
+      },
+      { replace: true }
+    );
+    reloadEntry && reloadEntry();
+  }, [theme, themePreference, activeId]);
 
   const handleSetTheme = (v: SettingsContext['themePreference']) => {
     setThemePreference(v);

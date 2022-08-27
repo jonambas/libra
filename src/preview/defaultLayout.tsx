@@ -1,45 +1,49 @@
 import { FC, PropsWithChildren } from 'react';
 
+const defaultStyles = (theme: 'dark' | 'light') => `
+  #root {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    padding: 16px;
+    font-size: 14px;
+    background: ${
+      theme === 'light' ? 'white' : theme === 'dark' ? '#1a1a1c' : 'inherit'
+    }; 
+  }
+
+  * {
+    color: ${theme === 'light' ? 'black' : theme === 'dark' ? 'white' : 'inherit'};
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+`;
+
 const DefaultLayout: FC<
   PropsWithChildren<{
     theme: 'light' | 'dark';
     themePreference: 'light' | 'dark' | 'system';
   }>
 > = (props) => {
-  const styles = {
-    color:
-      props.theme === 'light' ? 'black' : props.theme === 'dark' ? 'white' : undefined,
-    background:
-      props.theme === 'light' ? 'white' : props.theme === 'dark' ? 'black' : undefined
-  };
+  const { theme, children } = props;
 
-  if (!props.children) {
+  if (!children) {
     return (
-      <div
-        style={{
-          fontFamily:
-            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-          padding: '16px',
-          fontSize: '14px',
-          ...styles
-        }}
-      >
-        <p style={{ margin: '0 0 12px 0' }}>
-          <strong>Libra</strong>
-        </p>
-        <p style={{ margin: '0' }}>
-          See <a href="https://github.com/jonambas">Github</a> for more information.
-        </p>
-      </div>
+      <>
+        <style>{defaultStyles(theme)}</style>
+        <div>
+          <h1>Welcome to Libra!</h1>
+          <p>You can customize this default view by creating a custom layout.</p>
+          <p>
+            See <a href="https://github.com/jonambas/libra">github.com/jonambas/libra</a>{' '}
+            for more information.
+          </p>
+        </div>
+      </>
     );
   }
 
-  return (
-    <div style={styles}>
-      {props.children}
-      <div>theme: {props.theme}</div>
-    </div>
-  );
+  return <>{props.children}</>;
 };
 
 export default DefaultLayout;
