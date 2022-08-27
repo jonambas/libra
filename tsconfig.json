@@ -16,6 +16,6 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "vite"]
+    "types": ["vite/client", "vite", "cypress", "@testing-library/cypress"]
   }
 }

@@ -50,7 +50,7 @@ const Index: FC = () => {
   }, [theme, themePreference]);
 
   return (
-    <div className={cx(wrapperClassNames())}>
+    <div className={cx(wrapperClassNames())} aria-hidden={ready ? 'false' : 'true'}>
       <div
         aria-hidden={hideSidebar ? 'true' : undefined}
         tabIndex={hideSidebar ? -1 : undefined}
@@ -77,7 +77,6 @@ const Index: FC = () => {
         <Navigation />
       </div>
       <main
-        aria-hidden={ready ? 'false' : 'true'}
         className={css({
           flex: '1',
           display: 'flex',

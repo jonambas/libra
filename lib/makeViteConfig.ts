@@ -13,7 +13,6 @@ export const makeViteConfig = async (
   config: LibraConfig
 ): Promise<Record<string, any>> => {
   const {
-    backgrounds,
     cwd,
     dirname,
     inspect: inspectEnabled,
@@ -77,7 +76,7 @@ export const makeViteConfig = async (
       }
     },
     define: {
-      __LIBRA__: JSON.stringify({ title, backgrounds, debug: inspectEnabled })
+      __LIBRA__: JSON.stringify({ title, debug: inspectEnabled })
     }
   };
 

@@ -1,0 +1,17 @@
+{
+  "name": "libra-test-react-18",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preview": "libra preview",
+    "start": "libra start"
+  },
+  "author": "jon@jonambas.com",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "libra": "file:../../"
+  }
+}
