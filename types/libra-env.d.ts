@@ -1,5 +1,4 @@
 declare const __LIBRA__: {
-  backgrounds: string[];
   title: string;
   debug: boolean;
 };
