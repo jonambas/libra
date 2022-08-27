@@ -1,7 +1,8 @@
 import { useContext, useMemo } from 'react';
+import { createSearchParams } from 'react-router-dom';
+
 import { LibraContext } from '../context/libra';
 import { SettingsContext } from '../context/settings';
-import { createSearchParams } from 'react-router-dom';
 
 interface UseUrlOptions {
   preview?: boolean;
@@ -10,7 +11,7 @@ interface UseUrlOptions {
 
 const filterObject = (obj: Record<string, any>) => {
   return Object.keys(obj).reduce((acc, key) => {
-    if (Boolean(obj[key])) {
+    if (obj[key]) {
       return { ...acc, [key]: obj[key] };
     }
     return acc;

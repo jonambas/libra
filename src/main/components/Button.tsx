@@ -1,8 +1,9 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import cx from 'classnames';
+
 import { css } from '../stiches';
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {}
+type ButtonProps = ComponentPropsWithoutRef<'button'>;
 
 const styles = css({
   borderRadius: '$sm',
@@ -37,7 +38,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   );
 });
 
-interface ButtonLinkProps extends ComponentPropsWithoutRef<'a'> {}
+type ButtonLinkProps = ComponentPropsWithoutRef<'a'>;
 
 export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
   function ButtonLink(props, ref) {

@@ -1,14 +1,14 @@
 import { FC, MouseEventHandler, useCallback, useState, useContext, useMemo } from 'react';
 import cx from 'classnames';
-import { useSearchParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { LibraContext } from '../context/libra';
 import { css, styled } from '../stiches';
 import { Folder } from '../icons';
+import { useUrl } from '../hooks/useUrl';
+
 import { Text } from './Text';
 import { Input } from './Input';
-import { SettingsContext } from '../context/settings';
-import { useUrl } from '../hooks/useUrl';
 
 const searchableId = (id: string) => {
   return id.replace('__', ' ').replace('--', ' ').toLowerCase();

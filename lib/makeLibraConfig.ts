@@ -1,7 +1,9 @@
-import fs from 'fs';
-import { resolve } from 'path';
 import { pathToFileURL } from 'url';
+import { resolve } from 'path';
+import fs from 'fs';
+
 import { build } from 'esbuild';
+
 import type { Config } from '../api';
 
 export interface LibraConfig extends Partial<Config> {

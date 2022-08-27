@@ -1,6 +1,7 @@
 import type { InlineConfig } from 'vite';
-import { slugify, group, GroupedEntry } from './utils';
 import { Framecast } from 'framecast';
+
+import { slugify, group, GroupedEntry } from './utils';
 
 const toParent = new Framecast(window.parent);
 const toPreview = new Framecast(window);

@@ -7,7 +7,8 @@
   "bin": "dist/cli.mjs",
   "scripts": {
     "build": "rimraf dist && rollup -c",
-    "build:w": "rimraf dist && rollup -c -w"
+    "build:w": "rimraf dist && rollup -c -w",
+    "lint": "eslint ."
   },
   "keywords": [
     "react"
@@ -33,10 +34,16 @@
     "@types/node": "18.7.2",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.0",
+    "eslint-plugin-import": "^2.26.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rimraf": "3.0.2",
     "rollup": "2.78.1",
-    "rollup-plugin-esbuild": "4.10.1"
+    "rollup-plugin-esbuild": "4.10.1",
+    "typescript": "^4.8.2"
   }
 }

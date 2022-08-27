@@ -1,8 +1,11 @@
 import { fileURLToPath } from 'url';
+
 import { Command } from 'commander';
+
+import pkg from '../package.json';
+
 import { start, build, preview } from './commands';
 import { makeLibraConfig, LibraConfig } from './makeLibraConfig';
-import pkg from '../package.json';
 
 const program = new Command();
 const dirname = fileURLToPath(new URL('..', import.meta.url));

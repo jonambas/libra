@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, FC } from 'react';
+
 import { css } from '../stiches';
 
 export const Input: FC<ComponentPropsWithoutRef<'input'>> = (props) => {

@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import cx from 'classnames';
+
 import { css } from '../stiches';
 
 type TextProps = {

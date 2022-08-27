@@ -43,7 +43,7 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
 
       if (target) {
         const newFramecast = new Framecast(target);
-        newFramecast.on('broadcast', ({ event, data }: any) => {
+        newFramecast.on('broadcast', ({ event, data }: Record<string, any>) => {
           if (event === 'libra-load') {
             setEntries(data);
             setReady(true);

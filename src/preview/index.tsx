@@ -1,15 +1,12 @@
 import { FC } from 'react';
 import { createRoot } from 'react-dom/client';
+import Layout from '__LIBRA_LAYOUT__'; // User's layout
+import 'virtual:libra-entries'; // Initilizes entries
+
+import { instance } from '../../api';
 
 import { useLibraPreview } from './useLibraPreview';
 import { Boundary } from './error';
-import { instance } from '../../api';
-
-// User's layout
-import Layout from '__LIBRA_LAYOUT__';
-
-// Initilizes entries
-import 'virtual:libra-entries';
 
 // Global styling
 const style = document.createElement('style');

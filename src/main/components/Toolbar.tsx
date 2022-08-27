@@ -1,10 +1,12 @@
 import { FC, useContext } from 'react';
+import * as Select from '@radix-ui/react-select';
+
 import { Open } from '../icons';
 import { css } from '../stiches';
 import { SettingsContext } from '../context/settings';
-import * as Select from '@radix-ui/react-select';
-import { Button, ButtonLink } from './Button';
 import { useUrl } from '../hooks/useUrl';
+
+import { Button, ButtonLink } from './Button';
 
 const contentClassName = css({
   background: '$background',
