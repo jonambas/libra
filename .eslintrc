@@ -7,6 +7,7 @@
     "plugin:import/recommended",
     "plugin:import/typescript"
   ],
+  "ignorePatterns": ["**/dist"],
   "plugins": ["@typescript-eslint"],
   "settings": {
     "import/resolver": {
