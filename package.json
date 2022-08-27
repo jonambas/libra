@@ -10,9 +10,9 @@
     "build:w": "rimraf dist && rollup -c -w",
     "lint": "eslint .",
     "lint:ci": "eslint . --max-warnings 0",
-    "test": "npm run test:setup & $(npm bin)/cypress open",
-    "test:ci:setup": "cd tests/react-18 && npm ci && npm run preview",
-    "test:ci": "npm run test:setup && wait-on http://localhost:8080 && $(npm bin)/cypress run"
+    "install:tests": "cd tests/react-18 && npm ci",
+    "test": "cd tests/react-18 && npm run preview & $(npm bin)/cypress open",
+    "test:ci": "cd tests/react-18 && npm run preview & wait-on http://localhost:8080 && $(npm bin)/cypress run"
   },
   "keywords": [
     "react"
