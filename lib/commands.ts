@@ -17,6 +17,7 @@ export const start = async (config: LibraConfig): Promise<void> => {
 
 export const preview = async (config: LibraConfig): Promise<void> => {
   const finalConfig = await makeViteConfig(config);
+  await viteBuild(finalConfig);
   const server = await vitePreview(finalConfig);
   server.printUrls();
 };

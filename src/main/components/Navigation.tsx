@@ -37,6 +37,8 @@ export const Navigation: FC = () => {
         <Input
           name="search-libra"
           placeholder="Search..."
+          id="search-libra"
+          label="Search"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value.trim().toLowerCase());

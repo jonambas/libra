@@ -8,7 +8,10 @@
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "build:w": "rimraf dist && rollup -c -w",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:setup": "cd tests/react-18 && npm i && npm run preview",
+    "test": "npm run test:setup & $(npm bin)/cypress open",
+    "test:ci": "npm run test:setup & $(npm bin)/cypress run"
   },
   "keywords": [
     "react"
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "22.0.2",
+    "@testing-library/cypress": "^8.0.3",
     "@types/node": "18.7.2",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",

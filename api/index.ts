@@ -32,7 +32,7 @@ export interface Config {
   title?: string;
   port?: number;
   open?: boolean;
-  backgrounds?: Array<string>;
+  inspect?: boolean;
   layout?: string;
   outDir?: string;
   viteConfig?: () => InlineConfig;
