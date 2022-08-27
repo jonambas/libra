@@ -32,6 +32,16 @@ describe('Navigation', () => {
       'href',
       '/preview.html?theme=dark&themePreference=dark'
     );
+
+    cy.findByTitle('Libra Preview')
+      .its('0.contentDocument.body')
+      .within(() => {
+        cy.findAllByText('Welcome to Libra!').should(
+          'have.css',
+          'color',
+          'rgb(255, 255, 255)'
+        );
+      });
   });
 
   it('should generate preview iframe urls after clicking an entry', () => {
