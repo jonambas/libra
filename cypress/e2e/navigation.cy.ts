@@ -50,6 +50,10 @@ describe('Navigation', () => {
       cy.findAllByRole('link').first().click();
     });
     cy.url().should('include', 'entry=root--root-story-1');
+
+    cy.findByTitle('Libra Preview')
+      .its('0.contentDocument.body')
+      .should('contain.text', 'root story 1');
   });
 
   it('should navigate to an item in a folder', () => {
@@ -59,5 +63,9 @@ describe('Navigation', () => {
       cy.findAllByRole('link').first().click();
     });
     cy.url().should('include', 'entry=root__folder-1--story-1');
+
+    cy.findByTitle('Libra Preview')
+      .its('0.contentDocument.body')
+      .should('contain.text', 'folder 1 story 1');
   });
 });

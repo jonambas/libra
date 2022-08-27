@@ -14,6 +14,7 @@ export const Iframe: FC = () => {
       })()}
     >
       <iframe
+        title="Libra Preview"
         id="libra-preview-iframe"
         className={css({
           border: 'none'
