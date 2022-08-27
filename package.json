@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:ci": "eslint . --max-warnings 0",
     "test": "npm run test:setup & $(npm bin)/cypress open",
-    "test:ci:setup": "cd tests/react-18 && npm i && npm run preview",
+    "test:ci:setup": "cd tests/react-18 && npm ci && npm run preview",
     "test:ci": "npm run test:setup && wait-on http://localhost:8080 && $(npm bin)/cypress run"
   },
   "keywords": [
