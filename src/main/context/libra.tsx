@@ -33,7 +33,7 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
   const [entries, setEntries] = useState<GroupedEntry[]>([]);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [framecast, setFramecast] = useState<Framecast | null>(null);
-  const [activeId, setActiveId] = useState<string>();
+  const [activeId, setActiveId] = useState<string>(initialEntry ?? '');
   const [reload, setForceReload] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
 

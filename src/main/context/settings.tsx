@@ -38,9 +38,11 @@ export const SettingsProvider: FC<PropsWithChildren> = (props) => {
     if (paramTheme) {
       setTheme(paramTheme as 'light' | 'dark');
     }
+
     if (paramThemePreference) {
       setThemePreference(paramThemePreference as 'light' | 'dark' | 'system');
     }
+
     setSearchParams(
       {
         themePreference: paramThemePreference,
