@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "preview": "libra preview",
-    "start": "libra start"
+    "start": "libra start",
+    "build": "libra build"
   },
   "author": "jon@jonambas.com",
   "license": "MIT",
