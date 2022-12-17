@@ -34,7 +34,7 @@
     "vite-plugin-inspect": "^0.7.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "22.0.2",
+    "@rollup/plugin-commonjs": "23.0.7",
     "@testing-library/cypress": "8.0.3",
     "@types/node": "18.7.2",
     "@types/react": "18.0.20",
