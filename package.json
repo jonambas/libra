@@ -1,7 +1,10 @@
 {
-  "name": "libra",
+  "name": "@sweatpants/libra",
   "version": "0.0.1",
   "description": "",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "api/index.ts",
   "types": "api/index.d.ts",
   "bin": "dist/cli.mjs",
