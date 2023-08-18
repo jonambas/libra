@@ -14,8 +14,8 @@
     "lint": "eslint .",
     "lint:ci": "eslint . --max-warnings 0",
     "prepare:test": "npm run build && cd tests/react-18 && npm ci",
-    "test": "cd tests/react-18 && npm run preview & $(npm bin)/cypress open",
-    "test:ci": "cd tests/react-18 && npm run preview & wait-on http://localhost:8080 && $(npm bin)/cypress run"
+    "test": "cd tests/react-18 && npm run preview & cypress open",
+    "test:ci": "cd tests/react-18 && npm run preview & wait-on http://localhost:8080 && cypress run"
   },
   "keywords": [
     "react"
@@ -44,7 +44,7 @@
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
-    "cypress": "10.8.0",
+    "cypress": "^12.17.4",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-typescript": "3.5.1",
     "eslint-plugin-import": "2.26.0",
