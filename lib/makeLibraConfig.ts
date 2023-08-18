@@ -2,7 +2,7 @@ import { pathToFileURL } from 'url';
 import { resolve } from 'path';
 import fs from 'fs';
 
-import { red } from 'picocolors';
+import pc from 'picocolors';
 import { build } from 'esbuild';
 
 import type { Config } from '../api';
@@ -25,7 +25,9 @@ export const resolveConfig = async (cwd: string): Promise<Partial<LibraConfig>> 
 
     if (!fs.existsSync(configPath)) {
       console.log(
-        red('\nConfig file (libra.config.js) not found. Using default Libra settings\n')
+        pc.red(
+          '\nConfig file (libra.config.js) not found. Using default Libra settings\n'
+        )
       );
       return {};
     }
