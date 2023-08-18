@@ -68,7 +68,7 @@ export const makeViteConfig = async (
     resolve: {
       preserveSymlinks: true,
       alias: {
-        libra: resolve(dirname, 'api'),
+        '@sweatpants/libra': resolve(dirname, 'api'),
         react: resolve(cwd, 'node_modules/react'),
         __LIBRA_LAYOUT__: layout
           ? resolve(cwd, layout)

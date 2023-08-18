@@ -1,4 +1,4 @@
-import { describe, add } from 'libra';
+import { describe, add } from '@sweatpants/libra';
 
 describe('folder 1', () => {
   add('story 1', () => {

@@ -23,7 +23,7 @@ export const libraPlugin = async (): Promise<Plugin> => {
     load(id: string) {
       if (id === resolvedVirtualId) {
         return `
-        import { instance } from 'libra';
+        import { instance } from '@sweatpants/libra';
 
         const run = async () => {
           ${entryImports.join('\n')}
