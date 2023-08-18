@@ -1,36 +1,12 @@
 import { FC, useContext } from 'react';
 import * as Select from '@radix-ui/react-select';
+import './Select.css';
 
 import { Open } from '../icons';
-import { css } from '../stiches';
 import { SettingsContext } from '../context/settings';
 import { useUrl } from '../hooks/useUrl';
 
 import { Button, ButtonLink } from './Button';
-
-const contentClassName = css({
-  background: '$background',
-  padding: '$1',
-  marginTop: '$1',
-  border: '1px solid $interactiveBorder',
-  borderRadius: '$sm',
-  minWidth: '100px',
-  boxShadow: '$overlay'
-});
-
-const itemClassName = css({
-  background: '$background',
-  padding: '$1p5',
-  borderRadius: '$xs',
-  outline: 'none',
-  cursor: 'pointer',
-  fontSize: '$100',
-  color: '$text',
-  '&:hover, &:focus': {
-    background: '$interactiveFocusBg',
-    color: '$interactiveFocusText'
-  }
-});
 
 const Listbox: FC = () => {
   const { setTheme } = useContext(SettingsContext);
@@ -46,15 +22,15 @@ const Listbox: FC = () => {
           Theme: <Select.Value />
         </Button>
       </Select.Trigger>
-      <Select.Content className={contentClassName()}>
+      <Select.Content className="select-content">
         <Select.Viewport>
-          <Select.Item value="system" className={itemClassName()}>
+          <Select.Item value="system" className="select-item">
             <Select.ItemText>System</Select.ItemText>
           </Select.Item>
-          <Select.Item value="light" className={itemClassName()}>
+          <Select.Item value="light" className="select-item">
             <Select.ItemText>Light</Select.ItemText>
           </Select.Item>
-          <Select.Item value="dark" className={itemClassName()}>
+          <Select.Item value="dark" className="select-item">
             <Select.ItemText>Dark</Select.ItemText>
           </Select.Item>
         </Select.Viewport>
@@ -68,19 +44,14 @@ export const Toolbar: FC = () => {
   const url = useUrl({ preview: true });
 
   return (
-    <div
-      className={css({
-        padding: '0 $8'
-      })()}
-    >
+    <div style={{ padding: 'var(--space3)' }}>
       <div
-        className={css({
+        style={{
           display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'center',
-          padding: '$3 0',
           gap: '$0p5'
-        })()}
+        }}
       >
         <div>
           <Button onClick={toggleSidebar}>{hideSidebar ? 'Show' : 'Hide'} Sidebar</Button>
@@ -94,12 +65,9 @@ export const Toolbar: FC = () => {
             href={url}
             rel="noopener noreferrer"
             target="_blank"
-            className={css({
-              display: 'inline-flex',
-              alignItems: 'center'
-            })()}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '2px' }}
           >
-            Preview iFrame <Open />
+            Preview iFrame <Open width={14} height={14} />
           </ButtonLink>
         </div>
       </div>

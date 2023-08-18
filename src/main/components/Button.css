@@ -1,0 +1,24 @@
+.button {
+  margin: 0;
+  height: 30px;
+
+  border-radius: var(--radiiSm);
+  background: var(--background);
+  font-size: var(--fontSize100);
+  color: var(--text);
+  outline: none;
+  border: 1px solid transparent;
+  padding: var(--space1p5) var(--space2);
+
+  cursor: pointer;
+  transition: 0.08s;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--interactiveHoverBg);
+    color: var(--interactiveHoverText);
+  }
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--primary);
+  }
+}

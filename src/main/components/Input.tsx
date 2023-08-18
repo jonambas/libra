@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef, FC } from 'react';
-
-import { css } from '../stiches';
+import './Input.css';
 
 export const Input: FC<ComponentPropsWithoutRef<'input'> & { label: string }> = (
   props
@@ -21,31 +20,7 @@ export const Input: FC<ComponentPropsWithoutRef<'input'> & { label: string }> = 
       >
         {props.label}
       </label>
-      <input
-        id={props.id}
-        className={css({
-          width: '100%',
-          padding: '$2',
-          background: '$background',
-          border: '1px solid $interactiveBorder',
-          borderRadius: '$sm',
-          transition: '0.08s',
-          color: '$text',
-          '&:hover': {
-            background: '$interactiveBg'
-          },
-          '&:focus': {
-            outline: 'none',
-            boxShadow: '$focus',
-            border: '1px solid transparent'
-          },
-          '&::placeholder': {
-            color: '$text'
-          }
-        })()}
-        type="text"
-        {...props}
-      />
+      <input id={props.id} className="input" type="text" {...props} />
     </>
   );
 };

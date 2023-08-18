@@ -1,7 +1,4 @@
 import { FC, PropsWithChildren } from 'react';
-import cx from 'classnames';
-
-import { css } from '../stiches';
 
 type TextProps = {
   as?: keyof JSX.IntrinsicElements;
@@ -10,16 +7,5 @@ type TextProps = {
 
 export const Text: FC<PropsWithChildren<TextProps>> = (props) => {
   const { as: Element = 'p', className, children } = props;
-  return (
-    <Element
-      className={cx(
-        css({
-          // color: 'inherit'
-        })(),
-        className
-      )}
-    >
-      {children}
-    </Element>
-  );
+  return <Element className={className}>{children}</Element>;
 };

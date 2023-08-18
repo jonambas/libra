@@ -1,9 +1,9 @@
+import './Navigation.css';
 import { FC, MouseEventHandler, useCallback, useState, useContext, useMemo } from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
 
 import { LibraContext } from '../context/libra';
-import { css, styled } from '../stiches';
 import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
 
@@ -30,9 +30,10 @@ export const Navigation: FC = () => {
   return (
     <>
       <div
-        className={css({
-          padding: '$3 $1 $3 $3'
-        })()}
+        style={{
+          padding: 'var(--space3)',
+          paddingRight: 'var(--space1)'
+        }}
       >
         <Input
           name="search-libra"
@@ -45,10 +46,8 @@ export const Navigation: FC = () => {
           }}
         />
       </div>
-      <nav className={css({ height: '100%', overflow: 'auto', padding: '0 $3 $6' })()}>
-        {empty && (
-          <Text className={css({ fontSize: '$100', marginTop: '$2' })()}>No Results</Text>
-        )}
+      <nav className="nav">
+        {empty && <Text className="no-results">No Results</Text>}
         {entries.map((entry, i) => {
           return <Item key={i} {...entry} searchTerm={searchTerm} />;
         })}
@@ -56,21 +55,6 @@ export const Navigation: FC = () => {
     </>
   );
 };
-
-const FolderIcon = styled(Folder, {
-  transition: '0.08s',
-  color: '$gray500',
-  variants: {
-    point: {
-      right: {
-        transform: 'rotate(0deg)'
-      },
-      down: {
-        transform: 'rotate(90deg)'
-      }
-    }
-  }
-});
 
 const searchChildrenEntries = (children: Array<any>, searchTerm: string): boolean => {
   return children.reduce((acc, child) => {
@@ -125,54 +109,24 @@ const Item: FC<any> = (props) => {
 
   return (
     <div>
-      <button
-        onClick={() => setOpen(!open)}
-        className={css({
-          display: 'inline-flex',
-          alignItems: 'center',
-          width: '100%',
-          fontSize: '$100',
-          padding: '$1',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          borderRadius: '$sm',
-          color: '$text',
-          outline: 'none',
-          transition: '0.08s',
-          '&:hover': {
-            background: '$interactiveHoverBg',
-            color: '$interactiveHoverText'
-          },
-          '&:focus-visible, &:focus-visible *': {
-            background: '$interactiveFocusBg',
-            color: '$interactiveFocusText'
-          }
-        })()}
-      >
-        <FolderIcon point={open || containsSearchItem ? 'down' : 'right'} />
-        <span
-          className={css({
-            marginLeft: '$0p5'
-          })()}
-        >
+      <button onClick={() => setOpen(!open)} className="folder">
+        <Folder
+          className={cx('folder-icon', open || containsSearchItem ? 'down' : 'right')}
+        />
+        <span style={{ marginLeft: 'var(--space0p5)' }}>
           <Text as="span">{name}</Text>
         </span>
       </button>
-      <div
-        className={css({
-          marginLeft: '$3p5'
-        })()}
-      >
+      <div style={{ marginLeft: 'var(--space3p5)' }}>
         {open || containsSearchItem ? (
           <FolderItem children={children} searchTerm={searchTerm} />
         ) : null}
         {open ||
           (containsSearchItem && (
             <div
-              className={css({
-                marginBottom: '$1'
-              })()}
+              style={{
+                marginBottom: 'var(--space1)'
+              }}
             />
           ))}
       </div>
@@ -200,63 +154,11 @@ const EntryItem: FC<any> = (props) => {
     return null;
   }
 
-  const baseClassname = css({
-    position: 'relative',
-    display: 'block',
-    textDecoration: 'none',
-    fontSize: '$100',
-    padding: '$1',
-    marginBottom: '$0p5',
-    borderRadius: '$sm',
-    color: '$text',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    transition: '0.08s',
-    outline: 'none',
-    '&:hover': {
-      background: '$interactiveHoverBg',
-      color: '$interactiveHoverText'
-    },
-    '&:focus-visible, &:focus-visible *': {
-      background: '$interactiveFocusBg',
-      color: '$interactiveFocusText'
-    },
-    '&:before': {
-      content: '',
-      display: 'block',
-      position: 'absolute',
-      left: '0',
-      top: '50%',
-      width: '6px',
-      height: '6px',
-      marginTop: '-3px',
-      background: '$interactiveFocusBg',
-      borderRadius: '$circle',
-      opacity: '0',
-      transition: '0.08s'
-    }
-  })();
-
-  const activeClassname = css({
-    background: '$interactiveActiveBg',
-    color: '$interactiveActiveText',
-    paddingLeft: '$4',
-    '&:hover': {
-      background: '$interactiveActiveBg',
-      color: '$interactiveActiveText'
-    },
-    '&:before': {
-      opacity: '1',
-      left: '$1p5'
-    }
-  })();
-
   return (
     <div>
       <Link
         to={url}
-        className={cx(baseClassname, activeId === id && activeClassname)}
+        className={cx(activeId === id && 'active')}
         onClick={handleClick}
         title={name}
       >
