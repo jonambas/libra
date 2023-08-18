@@ -14,7 +14,13 @@ const config = defineConfig({
       banner: '#!/usr/bin/env node'
     }
   ],
-  external: [...Object.keys(pkg.dependencies), 'url', 'path', 'fs'],
+  external: [
+    ...Object.keys(pkg.dependencies),
+    ...Object.keys(pkg.devDependencies),
+    'url',
+    'path',
+    'fs'
+  ],
   plugins: [
     cjs(),
     esbuild({
