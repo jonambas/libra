@@ -63,7 +63,11 @@ export const makeViteConfig = async (
         target: 'ES2020'
       },
       force: true,
-      exclude: [...entryPaths, resolve(dirname, 'src/preview/defaultLayout.tsx')]
+      exclude: [
+        ...entryPaths,
+        '@sweatpants/libra',
+        resolve(dirname, 'src/preview/defaultLayout.tsx')
+      ]
     },
     resolve: {
       preserveSymlinks: true,

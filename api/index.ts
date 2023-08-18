@@ -124,8 +124,6 @@ class Libra {
     Libra.entries = entries;
     this.emit('libra-load', entries);
 
-    console.log('load', Libra.map);
-
     // Source is cleared after loading for subsequent HMR renders
     // This ensures entries arent duplicated
     // There is no pre-hmr hook so we use source to stage changes
