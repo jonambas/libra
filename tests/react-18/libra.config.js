@@ -3,5 +3,6 @@
  */
 export default {
   title: 'Example Title',
-  port: 8080
+  port: 8080,
+  inspect: true
 };

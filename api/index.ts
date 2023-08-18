@@ -124,38 +124,13 @@ class Libra {
     Libra.entries = entries;
     this.emit('libra-load', entries);
 
+    console.log('load', Libra.map);
+
     // Source is cleared after loading for subsequent HMR renders
     // This ensures entries arent duplicated
     // There is no pre-hmr hook so we use source to stage changes
     Libra.map = Libra.source;
     Libra.source = {};
-  };
-
-  // Called on HMR
-  // Merges old entries with new entries
-  // and filters out entries with the same caller filename
-  // to dedupe the old entries
-  public reload = () => {
-    const caller = Libra.source[Object.keys(Libra.source)[0]].caller;
-
-    if (!caller) {
-      window.location.reload(); // bail
-    }
-
-    const dedupedEntries = Object.keys(Libra.map).reduce((acc, key) => {
-      const thisCaller = Libra.map[key].caller;
-      if (thisCaller !== caller) {
-        return { ...acc, [key]: Libra.map[key] };
-      }
-      return acc;
-    }, {});
-
-    Libra.map = { ...dedupedEntries, ...Libra.source };
-    Libra.source = {};
-
-    const entries = group(Libra.map, prefix);
-    Libra.entries = entries;
-    this.emit('libra-load', entries);
   };
 
   public get = (id: string): Entry | undefined => {

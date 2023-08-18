@@ -30,12 +30,12 @@ const Entry: FC<EntryProps> = (props) => {
   const { id, theme, themePreference } = props;
 
   if (id) {
-    const entry = instance.get(id);
+    const Entry = instance.get(id)?.render;
 
-    if (entry && entry.render) {
+    if (Entry) {
       return (
         <Layout theme={theme} themePreference={themePreference}>
-          {entry.render()}
+          <Entry />
         </Layout>
       );
     }
