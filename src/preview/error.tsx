@@ -5,23 +5,25 @@ const Fallback: FC<FallbackProps> = (props) => {
   const { error, resetErrorBoundary } = props;
 
   return (
-    <div role="alert">
-      <button onClick={resetErrorBoundary}>Reset Error Boundary</button>
-      <p className="title">
+    <div role="alert" className="libra-error-alert">
+      <button className="libra-error-button" onClick={resetErrorBoundary}>
+        Reset Error Boundary
+      </button>
+      <p className="libra-error-title">
         {error.name}: {error.message}
       </p>
-      <pre className="stack">{error.stack}</pre>
+      <pre className="libra-error-stack">{error.stack}</pre>
     </div>
   );
 };
 
 const style = `
-  [role="alert"] {
+  .libra-error-alert {
     font-family: sans-serif;
     padding: 16px;
   }
 
-  button {
+  button.libra-error-button {
     background: transparent;
     border: none;
     cursor: pointer;
@@ -32,19 +34,19 @@ const style = `
     text-decoration: underline;
   }
 
-  .title {
+  .libra-error-title {
     font-size: 20px;
     font-weight: bold;
   }
 
-  .stack {
+  .libra-error-stack {
     font-size: 11px;
     line-height: 1.8em;
   }
 `;
 
-const light = `[role="alert"] * { color: black; }`;
-const dark = `pre { color: #9ca3af; } .title,button { color: white; }`;
+const light = `.libra-error-alert * { color: black; }`;
+const dark = `.libra-error-stack { color: #9ca3af; } .title,button.libra-error-button { color: white; }`;
 
 export const Boundary: FC<PropsWithChildren<{ theme?: 'light' | 'dark' }>> = (props) => {
   return (
