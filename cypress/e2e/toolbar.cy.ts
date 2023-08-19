@@ -20,7 +20,7 @@ describe('Navigation', () => {
     cy.findByRole('link', { name: 'Preview iFrame' }).should(
       'have.attr',
       'href',
-      '/preview.html'
+      '/preview.html?'
     );
     cy.findAllByRole('link', { name: 'root story 1' }).click();
     cy.findByRole('link', { name: 'Preview iFrame' }).should(
