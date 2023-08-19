@@ -36,6 +36,7 @@ export const makeViteConfig = async (
     mode,
     configFile: false,
     root: dirname,
+    logLevel: 'info',
     server: {
       port,
       open,
@@ -49,7 +50,7 @@ export const makeViteConfig = async (
       open
     },
     build: {
-      outDir,
+      outDir: resolve(cwd, outDir),
       rollupOptions: {
         input: {
           main: resolve(dirname, 'index.html'),

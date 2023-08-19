@@ -11,7 +11,7 @@ export interface LibraConfig extends Partial<Config> {
   cwd: string;
   dirname: string;
   mode: 'production' | 'development';
-  inspect?: boolean;
+  outDir: string;
 }
 
 const dynamicImport = new Function('file', 'return import(file)');
