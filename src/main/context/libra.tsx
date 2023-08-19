@@ -27,8 +27,6 @@ export const LibraContext = createContext<Context>({});
 export const LibraProvider: FC<PropsWithChildren> = (props) => {
   const [searchParams] = useSearchParams();
   const initialEntry = searchParams.get('entry');
-  const theme = searchParams.get('theme');
-  const themePreference = searchParams.get('themePreference');
 
   const [entries, setEntries] = useState<GroupedEntry[]>([]);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -71,7 +69,7 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
     if (ready) {
       framecast?.broadcast({
         event: 'libra-entry',
-        data: { id: activeId, theme, themePreference }
+        data: { id: activeId }
       });
     }
   }, [ready, framecast, activeId, reload]);

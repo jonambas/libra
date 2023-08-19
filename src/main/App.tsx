@@ -1,5 +1,5 @@
 import './App.css';
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import cx from 'classnames';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -13,17 +13,8 @@ import { Text } from './components/Text';
 const { title } = __LIBRA__;
 
 const Index: FC = () => {
-  const { theme, themePreference, hideSidebar } = useContext(SettingsContext);
+  const { hideSidebar } = useContext(SettingsContext);
   const { ready } = useContext(LibraContext);
-
-  useEffect(() => {
-    // Adds dark mode class name to HTML tag
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme, themePreference]);
 
   return (
     <div className="wrapper" aria-hidden={ready ? 'false' : 'true'}>

@@ -2,7 +2,6 @@ import { useContext, useMemo } from 'react';
 import { createSearchParams } from 'react-router-dom';
 
 import { LibraContext } from '../context/libra';
-import { SettingsContext } from '../context/settings';
 
 interface UseUrlOptions {
   preview?: boolean;
@@ -20,20 +19,17 @@ const filterObject = (obj: Record<string, any>) => {
 
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
   const { activeId } = useContext(LibraContext);
-  const { theme, themePreference } = useContext(SettingsContext);
 
   const params = useMemo(
     () =>
       createSearchParams(
         new URLSearchParams(
           filterObject({
-            entry: id || activeId,
-            theme,
-            themePreference
+            entry: id || activeId
           })
         )
       ),
-    [id, theme, themePreference, activeId]
+    [id, activeId]
   );
 
   const path = preview ? '/preview.html' : '/';
