@@ -1,4 +1,13 @@
+/* eslint-disable no-var */
+
 import type { Config } from './';
-declare function add(name: string, render: () => JSX.Element): void;
-declare function describe(name: string, callback: () => void): void;
-export { add, describe, Config };
+
+type LibraAdd = (name: string, render: () => JSX.Element) => void;
+type LibraDirectory = (name: string, callback: () => void) => void;
+
+export { Config };
+
+declare global {
+  var add: LibraAdd;
+  var directory: LibraDirectory;
+}

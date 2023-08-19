@@ -1,6 +1,4 @@
-import { describe, add } from '@sweatpants/libra';
-
-describe('folder 1', () => {
+directory('folder 1', () => {
   add('story 1', () => {
     return <div>folder 1 story 1</div>;
   });
@@ -13,7 +11,7 @@ describe('folder 1', () => {
     return <div>folder 1 story 3</div>;
   });
 
-  describe('folder 1 nested', () => {
+  directory('folder 1 nested', () => {
     add('story 1', () => {
       return <div>folder 1 nested story 1</div>;
     });

@@ -10,7 +10,7 @@ describe('Navigation', () => {
   it('should render nav items', () => {
     cy.findByRole('navigation').within(() => {
       cy.findAllByRole('link').should('have.length', 2);
-      cy.findAllByRole('button').should('have.length', 1);
+      cy.findAllByRole('button').should('have.length', 2);
       cy.findAllByRole('link').first().should('have.text', 'root story 1');
       cy.findAllByRole('link').last().should('have.text', 'root story 2');
       cy.findAllByRole('button').first().should('have.text', 'folder 1');
@@ -21,15 +21,15 @@ describe('Navigation', () => {
     cy.findByRole('navigation').within(() => {
       cy.findAllByRole('button').first().click();
       cy.findAllByRole('link').should('have.length', 5);
-      cy.findAllByRole('button').should('have.length', 2);
+      cy.findAllByRole('button').should('have.length', 3);
     });
   });
 
   it('should search', () => {
     cy.findByLabelText('Search').type('3');
     cy.findByRole('navigation').within(() => {
-      cy.findAllByRole('link').should('have.length', 1);
-      cy.findAllByRole('button').should('have.length', 1);
+      cy.findAllByRole('link').should('have.length', 2);
+      cy.findAllByRole('button').should('have.length', 2);
       cy.findAllByRole('link').first().should('have.text', 'story 3');
       cy.findAllByRole('button').first().should('have.text', 'folder 1');
     });

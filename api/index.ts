@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 import type { InlineConfig } from 'vite';
 import { Framecast } from 'framecast';
 
@@ -74,7 +75,7 @@ class Libra {
     const id = `${Libra.group}--${slugify(name)}`;
 
     if (Libra.source[id]) {
-      throw new Error('Libra entry names must be unique.');
+      console.error(`Libra entry "${name}" is not unique.`);
     }
 
     Libra.source[id] = {
@@ -87,7 +88,7 @@ class Libra {
     };
   };
 
-  public describe = (name: string, callback: () => void): void => {
+  public directory = (name: string, callback: () => void): void => {
     if (!name || !callback) {
       return;
     }
@@ -121,8 +122,22 @@ class Libra {
 
   public load = (): void => {
     const entries = group(Libra.source, prefix);
-    Libra.entries = entries;
-    this.emit('libra-load', entries);
+
+    // Dedupes new entries from HMR with old entries
+    const deduped = [...(Libra.entries ?? []), ...entries].reduce<GroupedEntry[]>(
+      (acc, entry) => {
+        const entryIndex = acc.findIndex((v) => v.id === entry.id);
+        if (entryIndex > -1) {
+          acc[entryIndex] = entry;
+        } else {
+          acc.push(entry);
+        }
+        return acc;
+      },
+      []
+    );
+    Libra.entries = deduped;
+    this.emit('libra-load', deduped);
 
     // Source is cleared after loading for subsequent HMR renders
     // This ensures entries arent duplicated
@@ -141,5 +156,11 @@ class Libra {
 
 export type Instance = Libra;
 export const instance = Libra.getInstance();
-export const add = instance.add;
-export const describe = instance.describe;
+
+declare global {
+  var add: typeof instance.add;
+  var directory: typeof instance.directory;
+}
+
+globalThis.add = instance.add;
+globalThis.directory = instance.directory;

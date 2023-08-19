@@ -20,8 +20,6 @@ const replace = (params: Record<string, any>): void => {
 
 type PreviewSettings = {
   id?: string;
-  themePreference?: 'light' | 'dark' | 'system';
-  theme?: 'light' | 'dark';
 };
 
 export const useLibraPreview = (): PreviewSettings => {
@@ -35,18 +33,13 @@ export const useLibraPreview = (): PreviewSettings => {
 
     if (event === 'libra-entry') {
       replace({
-        entry: data.id,
-        theme: data.theme,
-        themePreference: data.themePreference
+        entry: data.id
       });
       forceUpdate();
     }
   });
 
   return {
-    id: params.get('entry') ?? undefined,
-    theme: (params.get('theme') ?? undefined) as PreviewSettings['theme'],
-    themePreference: (params.get('themePreference') ??
-      undefined) as PreviewSettings['themePreference']
+    id: params.get('entry') ?? undefined
   };
 };

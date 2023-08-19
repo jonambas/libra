@@ -46,13 +46,12 @@ const style = `
 `;
 
 const light = `.libra-error-alert * { color: black; }`;
-const dark = `.libra-error-stack { color: #9ca3af; } .title,button.libra-error-button { color: white; }`;
 
-export const Boundary: FC<PropsWithChildren<{ theme?: 'light' | 'dark' }>> = (props) => {
+export const Boundary: FC<PropsWithChildren> = (props) => {
   return (
     <>
       <style>{style}</style>
-      <style>{props.theme === 'dark' ? dark : light}</style>
+      <style>{light}</style>
       <ErrorBoundary FallbackComponent={Fallback}>{props.children}</ErrorBoundary>
     </>
   );

@@ -22,33 +22,31 @@ document.body.appendChild(out);
 
 type EntryProps = {
   id?: string;
-  theme?: 'light' | 'dark';
-  themePreference?: 'light' | 'dark' | 'system';
 };
 
 const Entry: FC<EntryProps> = (props) => {
-  const { id, theme, themePreference } = props;
+  const { id } = props;
 
   if (id) {
     const Entry = instance.get(id)?.render;
 
     if (Entry) {
       return (
-        <Layout theme={theme} themePreference={themePreference}>
+        <Layout>
           <Entry />
         </Layout>
       );
     }
   }
 
-  return <Layout theme={theme} themePreference={themePreference} />;
+  return <Layout />;
 };
 
 const Preview: FC = () => {
   const preview = useLibraPreview();
 
   return (
-    <Boundary theme={preview.theme}>
+    <Boundary>
       <Entry {...preview} />
     </Boundary>
   );
