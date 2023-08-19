@@ -51,6 +51,7 @@ class Libra {
 
   private constructor() {
     Libra.source = {};
+    Libra.map = {};
     Libra.group = prefix;
   }
 
@@ -75,7 +76,7 @@ class Libra {
     const id = `${Libra.group}--${slugify(name)}`;
 
     if (Libra.source[id]) {
-      console.error(`Libra entry "${name}" is not unique.`);
+      console.error(`[Libra] entry "${name}" is not unique.`);
     }
 
     Libra.source[id] = {
@@ -121,34 +122,23 @@ class Libra {
   };
 
   public load = (): void => {
-    const entries = group(Libra.source, prefix);
+    const newSource = { ...Libra.map, ...Libra.source };
+    const entries = group(newSource, prefix);
 
-    // Dedupes new entries from HMR with old entries
-    const deduped = [...(Libra.entries ?? []), ...entries].reduce<GroupedEntry[]>(
-      (acc, entry) => {
-        const entryIndex = acc.findIndex((v) => v.id === entry.id);
-        if (entryIndex > -1) {
-          acc[entryIndex] = entry;
-        } else {
-          acc.push(entry);
-        }
-        return acc;
-      },
-      []
-    );
-    Libra.entries = deduped;
-    this.emit('libra-load', deduped);
+    Libra.entries = entries;
+    this.emit('libra-load', entries);
 
     // Source is cleared after loading for subsequent HMR renders
     // This ensures entries arent duplicated
     // There is no pre-hmr hook so we use source to stage changes
-    Libra.map = Libra.source;
+    Libra.map = newSource;
     Libra.source = {};
   };
 
   public get = (id: string): Entry | undefined => {
-    if (!Libra.map) {
-      return;
+    if (!Libra.map || !Libra.map[id]) {
+      console.warn(`[Libra] entry with id "${id}" not found.`);
+      return undefined;
     }
     return Libra.map[id];
   };
