@@ -18,14 +18,14 @@ export const Navigation: FC = () => {
   const { entries } = useContext(LibraContext);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
+  const empty = useMemo(
+    () => (!entries ? true : !searchChildrenEntries(entries, searchTerm)),
+    [entries, searchTerm]
+  );
+
   if (!entries) {
     return null;
   }
-
-  const empty = useMemo(
-    () => !searchChildrenEntries(entries, searchTerm),
-    [entries, searchTerm]
-  );
 
   return (
     <>
@@ -97,7 +97,7 @@ const Item: FC<any> = (props) => {
     }
 
     return contains;
-  }, [searchTerm]);
+  }, [searchTerm, id, children]);
 
   if (searchTerm && !containsSearchItem) {
     return null;
@@ -119,7 +119,7 @@ const Item: FC<any> = (props) => {
       </button>
       <div style={{ marginLeft: 'var(--space3p5)' }}>
         {open || containsSearchItem ? (
-          <FolderItem children={children} searchTerm={searchTerm} />
+          <FolderItem searchTerm={searchTerm}>{children}</FolderItem>
         ) : null}
         {open ||
           (containsSearchItem && (

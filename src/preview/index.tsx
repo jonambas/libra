@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { createRoot } from 'react-dom/client';
+// eslint-disable-next-line import/no-unresolved
 import Layout from '__LIBRA_LAYOUT__'; // User's layout
+// eslint-disable-next-line import/no-unresolved
 import 'virtual:libra-entries'; // Initilizes entries
 
 import { instance } from '../../api';
