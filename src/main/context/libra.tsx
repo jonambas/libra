@@ -3,6 +3,7 @@ import {
   FC,
   PropsWithChildren,
   RefObject,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -61,18 +62,19 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
     }
   };
 
-  const reloadEntry = (): void => {
+  const reloadEntry = useCallback(() => {
     setForceReload(!reload);
-  };
+  }, [reload]);
 
   useEffect(() => {
     if (ready) {
+      console.log(activeId, ready, reload);
       framecast?.broadcast({
         event: 'libra-entry',
         data: { id: activeId }
       });
     }
-  }, [ready, framecast, activeId, reload]);
+  }, [ready, activeId, reload]);
 
   // Initial Load
   useEffect(() => {

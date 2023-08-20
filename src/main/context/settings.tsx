@@ -18,7 +18,7 @@ type SettingsContext = {
 export const SettingsContext = createContext<Partial<SettingsContext>>({});
 
 export const SettingsProvider: FC<PropsWithChildren> = (props) => {
-  const { activeId, reloadEntry } = useContext(LibraContext);
+  const { activeId } = useContext(LibraContext);
   const [hideSidebar, toggleSidebar] = useState<boolean>(false);
   const [, setSearchParams] = useSearchParams();
 
@@ -30,7 +30,6 @@ export const SettingsProvider: FC<PropsWithChildren> = (props) => {
       },
       { replace: true }
     );
-    reloadEntry && reloadEntry();
   }, [activeId]);
 
   return (

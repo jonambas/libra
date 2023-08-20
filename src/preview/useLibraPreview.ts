@@ -1,5 +1,5 @@
 import { Framecast } from 'framecast';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 
 const framecast = new Framecast(window.parent);
 
@@ -26,18 +26,26 @@ export const useLibraPreview = (): PreviewSettings => {
   const forceUpdate = useReducer(() => ({}), {})[1] as () => void;
   const params = new URLSearchParams(window.location.search);
 
-  framecast.on('broadcast', ({ event, data }: any) => {
-    if (event === 'libra-load' || event === 'libra-hmr') {
-      forceUpdate();
-    }
+  useEffect(() => {
+    const handler = ({ event, data }: any) => {
+      if (event === 'libra-load') {
+        forceUpdate();
+      }
 
-    if (event === 'libra-entry') {
-      replace({
-        entry: data.id
-      });
-      forceUpdate();
-    }
-  });
+      if (event === 'libra-entry') {
+        replace({
+          entry: data.id
+        });
+        forceUpdate();
+      }
+    };
+
+    framecast.on('broadcast', handler);
+
+    return () => {
+      framecast.off('broadcast', handler);
+    };
+  }, []);
 
   return {
     id: params.get('entry') ?? undefined
