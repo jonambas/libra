@@ -2,6 +2,7 @@
   "include": ["lib/index.ts", "src", "api", "types/libra-env.d.ts", "cypress/**/*.ts"],
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "baseUrl": ".",
     "target": "ES6",
     "module": "ES2022",

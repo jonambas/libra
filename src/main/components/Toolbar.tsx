@@ -16,8 +16,7 @@ export const Toolbar: FC = () => {
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
-          alignItems: 'center',
-          gap: '$0p5'
+          alignItems: 'center'
         }}
       >
         <div>

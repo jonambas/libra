@@ -1,8 +1,8 @@
 /* eslint-disable no-var */
-import type { InlineConfig } from 'vite';
 import { Framecast } from 'framecast';
 
-import { slugify, group, GroupedEntry } from './utils';
+import { slugify, group } from './utils';
+import type { Entry, GroupedEntry } from './types';
 
 const toParent = new Framecast(window.parent);
 const toPreview = new Framecast(window);
@@ -19,25 +19,6 @@ const caller = (): string | undefined => {
     ?.split('/')
     .pop();
 };
-
-export type Entry = {
-  group: string;
-  name: string;
-  id: string;
-  type: 'group' | 'entry';
-  render?: () => JSX.Element;
-  caller?: string;
-};
-
-export interface Config {
-  title?: string;
-  port?: number;
-  open?: boolean;
-  inspect?: boolean;
-  layout?: string;
-  outDir?: string;
-  viteConfig?: () => InlineConfig;
-}
 
 const prefix = 'root';
 

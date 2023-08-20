@@ -54,6 +54,7 @@
   & a.active {
     padding-left: var(--space4);
     background: var(--primaryBg);
+    color: var(--primary);
     &::before {
       opacity: 1;
       left: var(--space1p5);
