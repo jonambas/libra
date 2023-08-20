@@ -1,4 +1,4 @@
-import type { Entry } from './';
+import type { Entry, GroupedEntry } from './types';
 
 export const slugify = (string: string): string => {
   return string
@@ -9,10 +9,6 @@ export const slugify = (string: string): string => {
     .replace(/\s+/g, '-')
     .replace(/[^\w-]+/g, '')
     .replace(/--+/g, '-');
-};
-
-export type GroupedEntry = Partial<Entry> & {
-  children?: Array<GroupedEntry>;
 };
 
 const getGroupChildren = (entries: Entry[], currentGroup: string): Entry[] => {

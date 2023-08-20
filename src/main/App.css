@@ -16,7 +16,7 @@
   --primary: #0065ef;
   --primaryBg: #e2f1ff;
 
-  --fontSize100: 0.8125rem;
+  --fontSize100: 0.75rem;
   --fontSize200: 0.875rem;
   --fontSize300: 1rem;
 
@@ -93,6 +93,7 @@ body,
   font-size: var(--fontSize200);
   padding: var(--space4) 0 0 var(--space3);
   color: var(--text);
+  font-weight: 600;
 }
 
 main {

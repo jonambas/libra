@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom';
 import { LibraContext } from '../context/libra';
 import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
+import type { Entry, GroupedEntry } from '../../../api/types';
 
 import { Text } from './Text';
 import { Input } from './Input';
 
 const searchableId = (id: string) => {
-  return id.replace('__', ' ').replace('--', ' ').toLowerCase();
+  return id.replace('__', ' ').replaceAll('--', ' ').replaceAll('-', ' ').toLowerCase();
 };
 
 export const Navigation: FC = () => {
@@ -19,7 +20,8 @@ export const Navigation: FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const empty = useMemo(
-    () => (!entries ? true : !searchChildrenEntries(entries, searchTerm)),
+    () =>
+      !entries ? true : !searchChildrenEntries(entries, searchTerm.trim().toLowerCase()),
     [entries, searchTerm]
   );
 
@@ -42,27 +44,31 @@ export const Navigation: FC = () => {
           label="Search"
           value={searchTerm}
           onChange={(e) => {
-            setSearchTerm(e.target.value.trim().toLowerCase());
+            setSearchTerm(e.target.value);
           }}
         />
       </div>
       <nav className="nav">
         {empty && <Text className="no-results">No Results</Text>}
         {entries.map((entry, i) => {
-          return <Item key={i} {...entry} searchTerm={searchTerm} />;
+          return <Item key={i} {...entry} searchTerm={searchTerm.trim().toLowerCase()} />;
         })}
       </nav>
     </>
   );
 };
 
-const searchChildrenEntries = (children: Array<any>, searchTerm: string): boolean => {
-  return children.reduce((acc, child) => {
+const searchChildrenEntries = (
+  entries: Array<GroupedEntry>,
+  searchTerm: string
+): boolean => {
+  return entries.reduce((acc, child) => {
+    console.log(child?.id, searchableId(child?.id ?? ''), searchTerm);
     if (acc) {
       return acc;
     }
 
-    if (searchableId(child.id).includes(searchTerm)) {
+    if (child.id && searchableId(child.id).includes(searchTerm)) {
       return true;
     }
 
@@ -74,7 +80,11 @@ const searchChildrenEntries = (children: Array<any>, searchTerm: string): boolea
   }, false);
 };
 
-const Item: FC<any> = (props) => {
+const Item: FC<
+  GroupedEntry & {
+    searchTerm?: string;
+  }
+> = (props) => {
   const { searchTerm, children, type, name, id } = props;
   const [open, setOpen] = useState<boolean>(false);
 
@@ -87,7 +97,7 @@ const Item: FC<any> = (props) => {
     }
 
     // Checks if this folder itself matches input search
-    if (searchableId(id).includes(searchTerm)) {
+    if (id && searchableId(id).includes(searchTerm)) {
       return true;
     }
 
@@ -119,7 +129,7 @@ const Item: FC<any> = (props) => {
       </button>
       <div style={{ marginLeft: 'var(--space3p5)' }}>
         {open || containsSearchItem ? (
-          <FolderItem searchTerm={searchTerm}>{children}</FolderItem>
+          <FolderItem searchTerm={searchTerm} items={children} />
         ) : null}
         {open ||
           (containsSearchItem && (
@@ -134,14 +144,15 @@ const Item: FC<any> = (props) => {
   );
 };
 
-const FolderItem: FC<any> = (props) => {
-  const { children, searchTerm } = props;
-  return children.map((child: any) => {
+const FolderItem: FC<{ items?: Array<GroupedEntry>; searchTerm?: string }> = (props) => {
+  const { items, searchTerm } = props;
+  if (!items) return null;
+  return items.map((child: any) => {
     return <Item key={child.id} {...child} searchTerm={searchTerm} />;
   });
 };
 
-const EntryItem: FC<any> = (props) => {
+const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
   const { id, name, searchTerm } = props;
   const { activeId, loadEntry } = useContext(LibraContext);
   const url = useUrl({ id });
@@ -150,7 +161,7 @@ const EntryItem: FC<any> = (props) => {
     loadEntry && loadEntry(id);
   }, [id]);
 
-  if (searchTerm && !searchableId(id).includes(searchTerm)) {
+  if (id && searchTerm && !searchableId(id).includes(searchTerm)) {
     return null;
   }
 

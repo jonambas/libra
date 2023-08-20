@@ -12,7 +12,7 @@ import {
 import { Framecast } from 'framecast';
 import { useSearchParams } from 'react-router-dom';
 
-import type { GroupedEntry } from '../../../api/utils';
+import type { GroupedEntry } from '../../../api/types';
 
 type Context = {
   iframeRef?: RefObject<HTMLIFrameElement>;
