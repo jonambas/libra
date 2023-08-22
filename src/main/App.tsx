@@ -8,7 +8,6 @@ import { Iframe } from './components/Iframe';
 import { LibraContext, LibraProvider } from './context/libra';
 import { SettingsProvider, SettingsContext } from './context/settings';
 import { Toolbar } from './components/Toolbar';
-import { Text } from './components/Text';
 
 const { title } = __LIBRA__;
 
@@ -23,9 +22,7 @@ const Index: FC = () => {
         tabIndex={hideSidebar ? -1 : undefined}
         className={cx('sidebar', hideSidebar && 'is-hidden')}
       >
-        <Text as="h1" className="title">
-          {title}
-        </Text>
+        <h1 className="title">{title}</h1>
         <Navigation />
       </div>
       <main>

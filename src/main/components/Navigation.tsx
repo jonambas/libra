@@ -49,7 +49,7 @@ export const Navigation: FC = () => {
         />
       </div>
       <nav className="nav">
-        {empty && <Text className="no-results">No Results</Text>}
+        {empty && <span className="no-results">No Results</span>}
         {entries.map((entry, i) => {
           return <Item key={i} {...entry} searchTerm={searchTerm.trim().toLowerCase()} />;
         })}
@@ -123,9 +123,7 @@ const Item: FC<
         <Folder
           className={cx('folder-icon', open || containsSearchItem ? 'down' : 'right')}
         />
-        <span style={{ marginLeft: 'var(--space0p5)' }}>
-          <Text as="span">{name}</Text>
-        </span>
+        <span style={{ marginLeft: 'var(--space0p5)' }}>{name}</span>
       </button>
       <div style={{ marginLeft: 'var(--space3p5)' }}>
         {open || containsSearchItem ? (
@@ -173,7 +171,7 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
         onClick={handleClick}
         title={name}
       >
-        <Text as="span">{name}</Text>
+        name
       </Link>
     </div>
   );
