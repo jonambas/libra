@@ -1,3 +1,9 @@
 tests
 cypress
+cypress.config.ts 
 .github
+lib
+.eslintrc
+.prettierrc
+renovate.json
+rollup.config.js
