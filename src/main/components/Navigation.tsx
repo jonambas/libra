@@ -8,7 +8,6 @@ import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
 import type { Entry, GroupedEntry } from '../../../api/types';
 
-import { Text } from './Text';
 import { Input } from './Input';
 
 const searchableId = (id: string) => {
@@ -33,7 +32,8 @@ export const Navigation: FC = () => {
     <>
       <div
         style={{
-          padding: 'var(--space3)',
+          paddingTop: 'var(--space3)',
+          paddingLeft: 'var(--space3)',
           paddingRight: 'var(--space1)'
         }}
       >
@@ -49,7 +49,7 @@ export const Navigation: FC = () => {
         />
       </div>
       <nav className="nav">
-        {empty && <Text className="no-results">No Results</Text>}
+        {empty && <span className="no-results">No Results</span>}
         {entries.map((entry, i) => {
           return <Item key={i} {...entry} searchTerm={searchTerm.trim().toLowerCase()} />;
         })}
@@ -63,7 +63,6 @@ const searchChildrenEntries = (
   searchTerm: string
 ): boolean => {
   return entries.reduce((acc, child) => {
-    console.log(child?.id, searchableId(child?.id ?? ''), searchTerm);
     if (acc) {
       return acc;
     }
@@ -123,9 +122,7 @@ const Item: FC<
         <Folder
           className={cx('folder-icon', open || containsSearchItem ? 'down' : 'right')}
         />
-        <span style={{ marginLeft: 'var(--space0p5)' }}>
-          <Text as="span">{name}</Text>
-        </span>
+        <span style={{ marginLeft: 'var(--space0p5)' }}>{name}</span>
       </button>
       <div style={{ marginLeft: 'var(--space3p5)' }}>
         {open || containsSearchItem ? (
@@ -147,7 +144,7 @@ const Item: FC<
 const FolderItem: FC<{ items?: Array<GroupedEntry>; searchTerm?: string }> = (props) => {
   const { items, searchTerm } = props;
   if (!items) return null;
-  return items.map((child: any) => {
+  return items.map((child: GroupedEntry) => {
     return <Item key={child.id} {...child} searchTerm={searchTerm} />;
   });
 };
@@ -173,7 +170,7 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
         onClick={handleClick}
         title={name}
       >
-        <Text as="span">{name}</Text>
+        {name}
       </Link>
     </div>
   );

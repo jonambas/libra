@@ -7,7 +7,9 @@
   },
   "main": "api/index.ts",
   "types": "api/index.d.ts",
-  "bin": "dist/cli.mjs",
+  "bin": {
+    "libra": "dist/cli.mjs"
+  },
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "build:w": "rimraf dist && rollup -c -w",

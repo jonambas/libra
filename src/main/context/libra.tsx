@@ -68,7 +68,6 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
 
   useEffect(() => {
     if (ready) {
-      console.log(activeId, ready, reload);
       framecast?.broadcast({
         event: 'libra-entry',
         data: { id: activeId }
