@@ -6,21 +6,14 @@
 
 :root {
   --background: white;
-  --text: black;
-  --textLight: #333;
-
-  --interactiveHoverBg: #eceff8;
-  --interactiveHoverText: #0e233c;
-  --interactiveHoverBorder: #d8deeb;
-
-  --primary: #0065ef;
-  --primaryBg: #e2f1ff;
-
+  --text: #1c2024;
+  --interactiveHoverBg: #f2f2f5;
+  --borders: #d3d4db;
+  --primary: #0b68cb;
+  --primaryBg: #e1f0ff;
   --fontSize100: 0.75rem;
   --fontSize200: 0.875rem;
   --fontSize300: 1rem;
-
-  --space0: 0rem;
   --space0p5: 0.125rem;
   --space1: 0.25rem;
   --space1p5: 0.375rem;
@@ -32,43 +25,23 @@
   --space6: 1.5rem;
   --space7: 1.75rem;
   --space8: 2rem;
-  --space10: 2.5rem;
-  --space12: 3rem;
-  --space16: 4rem;
-  --space20: 5rem;
-  --space24: 6rem;
-  --space32: 8rem;
-
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --mono: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
-
-  --radiiNone: 0px;
-  --radiiXs: 0.125rem;
   --radiiSm: 0.25rem;
-  --radiiMd: 0.375rem;
-  --radiiLg: 0.5rem;
-  --radiiXl: 0.75rem;
   --radiiCircle: 50%;
-  --radiiPill: 9999px;
-}
-
-.dark {
-  --text: white;
-  --background: black;
 }
 
 html {
   font-family: var(--sans);
   color: var(--text);
+  background: var(--background);
 }
 
 html,
 body,
 #root {
   height: 100%;
-  background: var(--background);
-  transition: background 0.08s;
 }
 
 .wrapper {
@@ -118,4 +91,11 @@ main {
 
 iframe {
   border: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 1px var(--background), 0 0 0 3px var(--primary);
 }

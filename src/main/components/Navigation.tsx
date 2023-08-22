@@ -8,7 +8,6 @@ import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
 import type { Entry, GroupedEntry } from '../../../api/types';
 
-import { Text } from './Text';
 import { Input } from './Input';
 
 const searchableId = (id: string) => {
@@ -33,7 +32,8 @@ export const Navigation: FC = () => {
     <>
       <div
         style={{
-          padding: 'var(--space3)',
+          paddingTop: 'var(--space3)',
+          paddingLeft: 'var(--space3)',
           paddingRight: 'var(--space1)'
         }}
       >
@@ -63,7 +63,6 @@ const searchChildrenEntries = (
   searchTerm: string
 ): boolean => {
   return entries.reduce((acc, child) => {
-    console.log(child?.id, searchableId(child?.id ?? ''), searchTerm);
     if (acc) {
       return acc;
     }
@@ -145,7 +144,7 @@ const Item: FC<
 const FolderItem: FC<{ items?: Array<GroupedEntry>; searchTerm?: string }> = (props) => {
   const { items, searchTerm } = props;
   if (!items) return null;
-  return items.map((child: any) => {
+  return items.map((child: GroupedEntry) => {
     return <Item key={child.id} {...child} searchTerm={searchTerm} />;
   });
 };
@@ -171,7 +170,7 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
         onClick={handleClick}
         title={name}
       >
-        name
+        {name}
       </Link>
     </div>
   );

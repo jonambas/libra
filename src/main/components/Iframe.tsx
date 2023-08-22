@@ -9,8 +9,7 @@ export const Iframe: FC = () => {
     <div
       style={{
         flex: '1',
-        padding: 'var(--space8)',
-        paddingTop: '0'
+        padding: '0 var(--space8) var(--space8)'
       }}
     >
       <iframe
