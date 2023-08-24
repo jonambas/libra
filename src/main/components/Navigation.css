@@ -1,7 +1,7 @@
 .nav {
   height: 100%;
   overflow: auto;
-  padding: var(--space3) var(--space3) var(--space6);
+  padding: var(--space3) var(--space3) var(--space8);
 
   & button,
   & a {
