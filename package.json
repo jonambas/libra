@@ -11,7 +11,7 @@
     "libra": "dist/cli.mjs"
   },
   "scripts": {
-    "build": "rimraf dist && rollup -c",
+    "build": "rimraf dist && rollup -c && prepare:panda",
     "build:w": "rimraf dist && rollup -c -w",
     "lint": "eslint .",
     "prepare:panda": "panda codegen && panda cssgen",
