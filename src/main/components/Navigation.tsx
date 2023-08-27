@@ -5,7 +5,7 @@ import { Button, TextField } from '@sweatpants/react';
 import { LibraContext } from '../context/libra';
 import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
-import { css, cva } from '../../styled-system/css';
+import { css, cva } from '../../lb-system/css';
 import type { Entry, GroupedEntry } from '../../../api/types';
 
 const searchableId = (id: string) => {

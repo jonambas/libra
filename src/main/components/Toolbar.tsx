@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { Button, ButtonGroup } from '@sweatpants/react';
 
 import { Open } from '../icons';
-import { css } from '../../styled-system/css';
+import { css } from '../../lb-system/css';
 import { SettingsContext } from '../context/settings';
 import { useUrl } from '../hooks/useUrl';
 

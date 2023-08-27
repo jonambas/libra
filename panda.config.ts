@@ -22,7 +22,7 @@ export default defineConfig({
   prefix: 'lb',
 
   // The output directory for your css system
-  outdir: 'src/styled-system',
+  outdir: 'src/lb-system',
   gitignore: false,
   watch: false, // Flip this for local Libra ui development
   cwd: 'src'

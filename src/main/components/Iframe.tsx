@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 
 import { LibraContext } from '../context/libra';
-import { css } from '../../styled-system/css';
+import { css } from '../../lb-system/css';
 
 export const Iframe: FC = () => {
   const { iframeRef } = useContext(LibraContext);

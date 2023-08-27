@@ -5,4 +5,4 @@ dist
 cypress/videos
 cypress/downloads
 
-styled-system
+src/lb-system
