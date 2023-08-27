@@ -28,7 +28,6 @@ export const LibraContext = createContext<Context>({});
 export const LibraProvider: FC<PropsWithChildren> = (props) => {
   const [searchParams] = useSearchParams();
   const initialEntry = searchParams.get('entry');
-  console.log(initialEntry);
 
   const [entries, setEntries] = useState<GroupedEntry[]>([]);
   const iframeRef = useRef<HTMLIFrameElement>(null);
