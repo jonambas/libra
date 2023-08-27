@@ -7,3 +7,7 @@ lib
 .prettierrc
 renovate.json
 rollup.config.js
+
+src/lb-system/patterns
+src/lb-system/types
+src/lb-system/**/*.d.ts
