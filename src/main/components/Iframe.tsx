@@ -1,16 +1,20 @@
 import { FC, useContext } from 'react';
 
 import { LibraContext } from '../context/libra';
+import { css } from '../../styled-system/css';
 
 export const Iframe: FC = () => {
   const { iframeRef } = useContext(LibraContext);
 
   return (
     <div
-      style={{
+      className={css({
         flex: '1',
-        padding: '0 var(--space8) var(--space8)'
-      }}
+        paddingX: '8',
+        '& iframe': {
+          border: 'none'
+        }
+      })}
     >
       <iframe
         title="Libra Preview"

@@ -1,14 +1,12 @@
-import './Navigation.css';
 import { FC, MouseEventHandler, useCallback, useState, useContext, useMemo } from 'react';
-import cx from 'classnames';
 import { Link } from 'react-router-dom';
+import { Button, TextField } from '@sweatpants/react';
 
 import { LibraContext } from '../context/libra';
 import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
+import { css, cva } from '../../styled-system/css';
 import type { Entry, GroupedEntry } from '../../../api/types';
-
-import { Input } from './Input';
 
 const searchableId = (id: string) => {
   return id.replace('__', ' ').replaceAll('--', ' ').replaceAll('-', ' ').toLowerCase();
@@ -31,25 +29,35 @@ export const Navigation: FC = () => {
   return (
     <>
       <div
-        style={{
-          paddingTop: 'var(--space3)',
-          paddingLeft: 'var(--space3)',
-          paddingRight: 'var(--space1)'
-        }}
+        className={css({
+          paddingLeft: '5',
+          paddingTop: '4',
+          paddingRight: '2'
+        })}
       >
-        <Input
+        <TextField
           name="search-libra"
           placeholder="Search..."
           id="search-libra"
           label="Search"
+          hideLabel
           value={searchTerm}
+          size="sm"
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
         />
       </div>
-      <nav className="nav">
-        {empty && <span className="no-results">No Results</span>}
+      <nav
+        className={css({
+          height: '100%',
+          overflow: 'auto',
+          paddingX: '5',
+          paddingTop: '5',
+          paddingBottom: '8'
+        })}
+      >
+        {empty && <span className={css({ fontSize: '4' })}>No Results</span>}
         {entries.map((entry, i) => {
           return <Item key={i} {...entry} searchTerm={searchTerm.trim().toLowerCase()} />;
         })}
@@ -118,24 +126,24 @@ const Item: FC<
 
   return (
     <div>
-      <button onClick={() => setOpen(!open)} className="folder">
+      <Button
+        kind="bare"
+        size="xs"
+        onClick={() => setOpen(!open)}
+        className={css({ w: '100%', marginBottom: '2' })}
+      >
         <Folder
-          className={cx('folder-icon', open || containsSearchItem ? 'down' : 'right')}
+          style={{
+            transform: open || containsSearchItem ? 'rotate(90deg)' : 'rotate(0deg)'
+          }}
         />
-        <span style={{ marginLeft: 'var(--space0p5)' }}>{name}</span>
-      </button>
-      <div style={{ marginLeft: 'var(--space3p5)' }}>
+        <span className={css({ marginLeft: '1' })}>{name}</span>
+      </Button>
+      <div className={css({ marginLeft: '5' })}>
         {open || containsSearchItem ? (
           <FolderItem searchTerm={searchTerm} items={children} />
         ) : null}
-        {open ||
-          (containsSearchItem && (
-            <div
-              style={{
-                marginBottom: 'var(--space1)'
-              }}
-            />
-          ))}
+        {open || (containsSearchItem && <div />)}
       </div>
     </div>
   );
@@ -162,16 +170,49 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
     return null;
   }
 
+  const selected = activeId === id;
+
   return (
     <div>
-      <Link
-        to={url}
-        className={cx(activeId === id && 'active')}
-        onClick={handleClick}
-        title={name}
+      <Button
+        asChild
+        kind="bare"
+        size="xs"
+        selected={selected}
+        className={cva({
+          base: {
+            display: 'block!',
+            marginBottom: '2',
+            overflow: 'hidden',
+            _after: {
+              content: '""',
+              position: 'absolute',
+              top: '50%',
+              left: '-15px',
+              transform: 'translateY(-50%)',
+              width: '6px',
+              height: '6px',
+              bg: 'blue10',
+              borderRadius: '50%',
+              transition: '0.15s',
+              opacity: 0
+            }
+          },
+          variants: {
+            selected: {
+              true: {
+                paddingLeft: '6!',
+                _after: { left: '5px', opacity: 1 }
+              },
+              false: {}
+            }
+          }
+        })({ selected })}
       >
-        {name}
-      </Link>
+        <Link to={url} onClick={handleClick} title={name}>
+          {name}
+        </Link>
+      </Button>
     </div>
   );
 };

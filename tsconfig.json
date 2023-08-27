@@ -1,5 +1,12 @@
 {
-  "include": ["lib/index.ts", "src", "api", "types/libra-env.d.ts", "cypress/**/*.ts"],
+  "include": [
+    "lib/index.ts",
+    "src",
+    "api",
+    "types/libra-env.d.ts",
+    "cypress/**/*.ts",
+    "styled-system"
+  ],
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

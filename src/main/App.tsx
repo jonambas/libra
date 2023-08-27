@@ -1,7 +1,9 @@
 import './App.css';
 import { FC, useContext } from 'react';
-import cx from 'classnames';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Text } from '@sweatpants/react';
+
+import { css, cva } from '../styled-system/css';
 
 import { Navigation } from './components/Navigation';
 import { Iframe } from './components/Iframe';
@@ -16,20 +18,68 @@ const Index: FC = () => {
   const { ready } = useContext(LibraContext);
 
   return (
-    <div className="wrapper" aria-hidden={ready ? 'false' : 'true'}>
+    <div
+      aria-hidden={ready ? 'false' : 'true'}
+      className={css({
+        display: 'flex'
+      })}
+    >
       <div
         aria-hidden={hideSidebar ? 'true' : undefined}
         tabIndex={hideSidebar ? -1 : undefined}
-        className={cx('sidebar', hideSidebar && 'is-hidden')}
+        className={cva({
+          base: {
+            display: 'flex',
+            flexDir: 'column',
+            width: '200px',
+            height: '100vh'
+          },
+          variants: {
+            hideSidebar: {
+              true: {
+                width: '0',
+                overflow: 'hidden',
+                visibility: 'hidden',
+                transform: 'translateX(-100%)'
+              },
+              false: {}
+            }
+          }
+        })({ hideSidebar })}
       >
-        <h1 className="title">{title}</h1>
+        <Text
+          looksLike="h5"
+          element="h1"
+          className={css({ paddingTop: '4', paddingLeft: '5' })}
+        >
+          {title}
+        </Text>
+
         <Navigation />
       </div>
-      <main>
+      <main className={css({ display: 'flex', flexDir: 'column', flex: '1' })}>
         <Toolbar />
         <Iframe />
       </main>
-      {!ready ? <div className="loading">Loading</div> : null}
+      {!ready ? (
+        <div
+          className={css({
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            height: '100vh',
+            width: '100vw',
+            bg: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'gray14',
+            fontSize: '4'
+          })}
+        >
+          Loading Libra...
+        </div>
+      ) : null}
     </div>
   );
 };

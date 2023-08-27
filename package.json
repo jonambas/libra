@@ -14,6 +14,7 @@
     "build": "rimraf dist && rollup -c",
     "build:w": "rimraf dist && rollup -c -w",
     "lint": "eslint .",
+    "prepare:panda": "panda codegen && panda cssgen --watch",
     "lint:ci": "eslint . --max-warnings 0",
     "prepare:test": "npm run build && cd tests/react-18 && npm ci",
     "test": "cd tests/react-18 && npm run preview & cypress open",
@@ -25,6 +26,7 @@
   "author": "jonambas",
   "license": "MIT",
   "dependencies": {
+    "@sweatpants/react": "^0.3.4",
     "@vitejs/plugin-react": "4.0.4",
     "classnames": "2.3.2",
     "commander": "11.0.0",
@@ -38,7 +40,9 @@
     "vite-plugin-inspect": "0.7.38"
   },
   "devDependencies": {
+    "@pandacss/dev": "^0.13.0",
     "@rollup/plugin-commonjs": "25.0.4",
+    "@sweatpants/panda-preset": "^0.3.1",
     "@testing-library/cypress": "9.0.0",
     "@types/node": "20.5.2",
     "@types/react": "18.2.21",
