@@ -20,6 +20,8 @@ export default defineConfig({
   },
 
   prefix: 'lb',
+  minify: true,
+  clean: true,
 
   // The output directory for your css system
   outdir: 'src/lb-system',
