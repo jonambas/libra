@@ -61,7 +61,6 @@ export const makeViteConfig = async (
     plugins: [libraPlugin(), react(), htmlPlugin(title), ...inspectPlugin],
     optimizeDeps: {
       esbuildOptions: {
-        minify: true,
         target: 'ES2020'
       },
       force: true,
@@ -70,7 +69,8 @@ export const makeViteConfig = async (
         '@sweatpants/libra',
         'lb-system/css',
         resolve(dirname, 'src/preview/defaultLayout.tsx')
-      ]
+      ],
+      include: ['react-dom']
     },
     resolve: {
       preserveSymlinks: true,
