@@ -67,7 +67,7 @@ export const makeViteConfig = async (
       exclude: [
         ...entryPaths,
         '@sweatpants/libra',
-        'styled-system/css',
+        'lb-system/css',
         resolve(dirname, 'src/preview/defaultLayout.tsx')
       ]
     },
