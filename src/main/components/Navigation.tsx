@@ -177,7 +177,7 @@ const Item: FC<
       <Button
         kind="bare"
         size="xs"
-        onClick={() => setOpen(shouldBeOpen ? false : true)}
+        onClick={() => setOpen(!shouldBeOpen)}
         className={css({ w: '100%', marginBottom: '2' })}
       >
         <Folder
