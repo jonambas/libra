@@ -75,12 +75,12 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
     }
   }, [ready, activeId, reload]);
 
-  // Initial Load
+  // Initial Load & browser navigation
   useEffect(() => {
     if (ready && initialEntry) {
       loadEntry(initialEntry);
     }
-  }, [ready]);
+  }, [ready, initialEntry]);
 
   return (
     <LibraContext.Provider

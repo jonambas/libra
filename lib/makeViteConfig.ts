@@ -51,6 +51,8 @@ export const makeViteConfig = async (
     },
     build: {
       outDir: resolve(cwd, outDir),
+      // Suppresses warning "outDir is not inside project root and will not be emptied."
+      emptyOutDir: true,
       rollupOptions: {
         input: {
           main: resolve(dirname, 'index.html'),

@@ -1,4 +1,12 @@
-import { FC, MouseEventHandler, useCallback, useState, useContext, useMemo } from 'react';
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useState,
+  useContext,
+  useMemo,
+  useEffect
+} from 'react';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@sweatpants/react';
 
@@ -87,13 +95,32 @@ const searchChildrenEntries = (
   }, false);
 };
 
+const searchActiveEntry = (entries: Array<GroupedEntry>, activeId: string): boolean => {
+  return entries.reduce((acc, child) => {
+    if (acc) {
+      return acc;
+    }
+
+    if (child.id && child.id === activeId) {
+      return true;
+    }
+
+    if (child.children) {
+      return searchActiveEntry(child.children, activeId);
+    }
+
+    return false;
+  }, false);
+};
+
 const Item: FC<
   GroupedEntry & {
     searchTerm?: string;
   }
 > = (props) => {
   const { searchTerm, children, type, name, id } = props;
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean | null>(null);
+  const { activeId } = useContext(LibraContext);
 
   const containsSearchItem = useMemo(() => {
     let contains = false;
@@ -116,9 +143,30 @@ const Item: FC<
     return contains;
   }, [searchTerm, id, children]);
 
+  // This only runs if `open` is null
+  const containsActiveId = useMemo(() => {
+    let contains = false;
+
+    // Checks child entries of this folder
+    if (children && activeId && open === null) {
+      contains = searchActiveEntry(children, activeId);
+    }
+
+    return contains;
+  }, [activeId, id, children, open]);
+
+  // Flips `open` after determining `containsActiveId` so that open reflects its true state
+  useEffect(() => {
+    if (containsActiveId && open === null) {
+      setOpen(true);
+    }
+  }, [containsActiveId]);
+
   if (searchTerm && !containsSearchItem) {
     return null;
   }
+
+  const shouldBeOpen = open || containsSearchItem || containsActiveId;
 
   if (type === 'entry') {
     return <EntryItem id={id} name={name} searchTerm={searchTerm} />;
@@ -129,20 +177,18 @@ const Item: FC<
       <Button
         kind="bare"
         size="xs"
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen(!shouldBeOpen)}
         className={css({ w: '100%', marginBottom: '2' })}
       >
         <Folder
           style={{
-            transform: open || containsSearchItem ? 'rotate(90deg)' : 'rotate(0deg)'
+            transform: shouldBeOpen ? 'rotate(90deg)' : 'rotate(0deg)'
           }}
         />
         <span className={css({ marginLeft: '1' })}>{name}</span>
       </Button>
       <div className={css({ marginLeft: '5' })}>
-        {open || containsSearchItem ? (
-          <FolderItem searchTerm={searchTerm} items={children} />
-        ) : null}
+        {shouldBeOpen ? <FolderItem searchTerm={searchTerm} items={children} /> : null}
         {open || (containsSearchItem && <div />)}
       </div>
     </div>
