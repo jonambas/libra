@@ -1,39 +1,36 @@
 import { FC, useContext } from 'react';
+import { Button, ButtonGroup } from '@sweatpants/react';
 
 import { Open } from '../icons';
+import { css } from '../../lb-system/css';
 import { SettingsContext } from '../context/settings';
 import { useUrl } from '../hooks/useUrl';
-
-import { Button, ButtonLink } from './Button';
 
 export const Toolbar: FC = () => {
   const { hideSidebar, toggleSidebar } = useContext(SettingsContext);
   const url = useUrl({ preview: true });
 
   return (
-    <div style={{ padding: 'var(--space3)' }}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          alignItems: 'center'
-        }}
-      >
-        <div>
-          <Button onClick={toggleSidebar}>{hideSidebar ? 'Show' : 'Hide'} Sidebar</Button>
-        </div>
-
-        <div>
-          <ButtonLink
-            href={url}
-            rel="noopener noreferrer"
-            target="_blank"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '2px' }}
-          >
+    <div
+      className={css({
+        padding: '4',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+      })}
+    >
+      <ButtonGroup kind="bare" size="sm" space="tight">
+        <Button onClick={toggleSidebar}>{hideSidebar ? 'Show' : 'Hide'} Sidebar</Button>
+        <Button
+          asChild
+          rel="noopener noreferrer"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '2px' }}
+        >
+          <a href={url} target="_blank" rel="noopener noreferrer">
             Preview iFrame <Open width={14} height={14} />
-          </ButtonLink>
-        </div>
-      </div>
+          </a>
+        </Button>
+      </ButtonGroup>
     </div>
   );
 };
