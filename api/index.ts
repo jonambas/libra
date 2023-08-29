@@ -103,9 +103,25 @@ class Libra {
   };
 
   public load = (): void => {
-    const newSource = { ...Libra.map, ...Libra.source };
-    const entries = group(newSource, prefix);
+    const caller = Libra.source[Object.keys(Libra.source)[0]].caller;
 
+    if (process.env.NODE_ENV === 'development' && !caller) {
+      window.location.reload(); // bail
+    }
+
+    // Finds entries in Libra.map that don't exist in new Libra.source map from HMR
+    // Libra.source only includes individual entries from the file that was refreshed
+    const dedupedEntries = Object.keys(Libra.map).reduce((acc, key) => {
+      const thisCaller = Libra.map[key].caller;
+      if (thisCaller !== caller) {
+        return { ...acc, [key]: Libra.map[key] };
+      }
+      return acc;
+    }, {});
+
+    const newSource = { ...dedupedEntries, ...Libra.source };
+
+    const entries = group(newSource, prefix);
     Libra.entries = entries;
     this.emit('libra-load', entries);
 

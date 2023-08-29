@@ -11,10 +11,17 @@ export const slugify = (string: string): string => {
     .replace(/--+/g, '-');
 };
 
+// Sort group names alphabetically, entries are not sorted
+const sortByGroupName = (arr: Entry[]) =>
+  arr.sort((a, b) =>
+    a.type === 'group' && b.type === 'group' ? (a.name < b.name ? -1 : 1) : 0
+  );
+
 const getGroupChildren = (entries: Entry[], currentGroup: string): Entry[] => {
-  const sorted = entries.sort((a, b) =>
+  const sorted = sortByGroupName(entries).sort((a, b) =>
     a.type === 'group' && b.type !== 'group' ? -1 : 1
   );
+
   return sorted.reduce<Entry[]>((acc, entry) => {
     if (entry.group !== currentGroup) {
       return acc;
@@ -52,5 +59,5 @@ export const group = (
     }
   }
 
-  return grouped;
+  return sortByGroupName(grouped);
 };
