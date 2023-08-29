@@ -85,7 +85,8 @@ export const makeViteConfig = async (
       }
     },
     define: {
-      __LIBRA__: JSON.stringify({ title, debug: inspectEnabled })
+      __LIBRA__: JSON.stringify({ title, debug: inspectEnabled }),
+      'process.env.NODE_ENV': JSON.stringify(mode)
     }
   };
 

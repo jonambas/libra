@@ -105,7 +105,7 @@ class Libra {
   public load = (): void => {
     const caller = Libra.source[Object.keys(Libra.source)[0]].caller;
 
-    if (!caller) {
+    if (process.env.NODE_ENV === 'development' && !caller) {
       window.location.reload(); // bail
     }
 

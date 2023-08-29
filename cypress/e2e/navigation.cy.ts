@@ -13,7 +13,7 @@ describe('Navigation', () => {
       cy.findAllByRole('button').should('have.length', 2);
       cy.findAllByRole('link').first().should('have.text', 'root story 1');
       cy.findAllByRole('link').last().should('have.text', 'root story 2');
-      cy.findAllByRole('button').first().should('have.text', 'folder 1');
+      cy.findAllByRole('button').first().should('have.text', 'file 2');
     });
   });
 
@@ -21,7 +21,7 @@ describe('Navigation', () => {
     cy.findByRole('navigation').within(() => {
       cy.findAllByRole('button').first().click();
       cy.findAllByRole('link').should('have.length', 5);
-      cy.findAllByRole('button').should('have.length', 3);
+      cy.findAllByRole('button').should('have.length', 2);
     });
   });
 
@@ -31,7 +31,7 @@ describe('Navigation', () => {
       cy.findAllByRole('link').should('have.length', 2);
       cy.findAllByRole('button').should('have.length', 2);
       cy.findAllByRole('link').first().should('have.text', 'story 3');
-      cy.findAllByRole('button').first().should('have.text', 'folder 1');
+      cy.findAllByRole('button').first().should('have.text', 'file 2');
     });
   });
 
@@ -62,7 +62,7 @@ describe('Navigation', () => {
       cy.findAllByRole('button').first().click();
       cy.findAllByRole('link').first().click();
     });
-    cy.url().should('include', 'entry=root__folder-1--story-1');
+    cy.url().should('include', 'entry=root__file-2--story-1');
 
     cy.findByTitle('Libra Preview')
       .its('0.contentDocument.body')
