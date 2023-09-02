@@ -20,6 +20,7 @@ const replace = (params: Record<string, any>): void => {
 
 type PreviewSettings = {
   id?: string;
+  scheme?: 'light' | 'dark';
 };
 
 export const useLibraPreview = (): PreviewSettings => {
@@ -34,7 +35,8 @@ export const useLibraPreview = (): PreviewSettings => {
 
       if (event === 'libra-entry') {
         replace({
-          entry: data.id
+          entry: data.id,
+          scheme: data.scheme
         });
         forceUpdate();
       }
@@ -48,6 +50,7 @@ export const useLibraPreview = (): PreviewSettings => {
   }, []);
 
   return {
-    id: params.get('entry') ?? undefined
+    id: params.get('entry') ?? undefined,
+    scheme: (params.get('scheme') as PreviewSettings['scheme']) ?? undefined
   };
 };
