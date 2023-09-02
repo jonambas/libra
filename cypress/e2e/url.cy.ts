@@ -10,6 +10,16 @@ describe('URL', () => {
         entry: 'root--root-story-1'
       }
     });
-    cy.url().should('include', 'entry=root--root-story-1&scheme=');
+    cy.url().should('include', 'entry=root--root-story-1&scheme=light');
+  });
+
+  it('should an entry with scheme', () => {
+    cy.visit('http://localhost:8080', {
+      qs: {
+        entry: 'root--root-story-1',
+        scheme: 'dark'
+      }
+    });
+    cy.url().should('include', 'entry=root--root-story-1&scheme=dark');
   });
 });

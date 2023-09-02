@@ -17,18 +17,19 @@ const filterObject = (obj: Record<string, any>) => {
 };
 
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
-  const { activeId } = useContext(LibraContext);
+  const { activeId, scheme } = useContext(LibraContext);
 
   const params = useMemo(
     () =>
       createSearchParams(
         new URLSearchParams(
           filterObject({
-            entry: id || activeId
+            entry: id || activeId,
+            scheme
           })
         )
       ),
-    [id, activeId]
+    [id, activeId, scheme]
   );
 
   const path = preview ? '/preview.html' : '/';
