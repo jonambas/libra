@@ -35,7 +35,7 @@
     "import/order": [
       "error",
       {
-        "newlines-between": "always"
+        "newlines-between": "off"
       }
     ],
     "import/no-unresolved": "warn",

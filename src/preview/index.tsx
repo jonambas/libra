@@ -1,15 +1,11 @@
 import { FC, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-// eslint-disable-next-line import/no-unresolved
 import Layout from '__LIBRA_LAYOUT__'; // User's layout
-// eslint-disable-next-line import/no-unresolved
 import 'virtual:libra-entries'; // Initilizes entries
-
+import { useColorScheme } from '@sweatpants/react';
 import { instance } from '../../api';
-
 import { useLibraPreview } from './useLibraPreview';
 import { Boundary } from './error';
-import { useColorScheme } from '@sweatpants/react';
 
 // Global styling
 const style = document.createElement('style');
