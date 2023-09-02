@@ -9,7 +9,6 @@ import {
 } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { UseColorScheme, useColorScheme } from '@sweatpants/react';
-
 import { LibraContext } from './libra';
 
 type SettingsContext = {

@@ -1,6 +1,5 @@
 import { FC, useContext } from 'react';
 import { Button, ButtonGroup, UseColorScheme, Select } from '@sweatpants/react';
-
 import { Open } from '../icons';
 import { css } from '../../lb-system/css';
 import { SettingsContext } from '../context/settings';

@@ -1,10 +1,8 @@
 import { resolve } from 'path';
-
 import { mergeConfig, InlineConfig } from 'vite';
 import inspect from 'vite-plugin-inspect';
 import react from '@vitejs/plugin-react';
 import fg from 'fast-glob';
-
 import { libraPlugin } from './vitePluginLibra';
 import { htmlPlugin } from './vitePluginHtml';
 import type { LibraConfig } from './makeLibraConfig';

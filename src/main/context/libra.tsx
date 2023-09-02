@@ -11,7 +11,6 @@ import {
 } from 'react';
 import { Framecast } from 'framecast';
 import { useSearchParams } from 'react-router-dom';
-
 import type { GroupedEntry } from '../../../api/types';
 
 type Context = {
