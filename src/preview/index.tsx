@@ -1,12 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 // eslint-disable-next-line import/no-unresolved
 import Layout from '__LIBRA_LAYOUT__'; // User's layout
 // eslint-disable-next-line import/no-unresolved
 import 'virtual:libra-entries'; // Initilizes entries
-
+import { useColorScheme } from '@sweatpants/react';
 import { instance } from '../../api';
-
 import { useLibraPreview } from './useLibraPreview';
 import { Boundary } from './error';
 
@@ -24,28 +23,34 @@ document.body.appendChild(out);
 
 type EntryProps = {
   id?: string;
+  scheme?: 'light' | 'dark';
 };
 
 const Entry: FC<EntryProps> = (props) => {
-  const { id } = props;
+  const { id, scheme } = props;
 
   if (id) {
     const Entry = instance.get(id)?.render;
 
     if (Entry) {
       return (
-        <Layout>
+        <Layout scheme={scheme}>
           <Entry />
         </Layout>
       );
     }
   }
 
-  return <Layout />;
+  return <Layout scheme={scheme} />;
 };
 
 const Preview: FC = () => {
   const preview = useLibraPreview();
+  const [, setPrefers] = useColorScheme({ setHtmlAttribute: true });
+
+  useEffect(() => {
+    preview.scheme && setPrefers(preview.scheme);
+  }, [preview.scheme]);
 
   return (
     <Boundary>

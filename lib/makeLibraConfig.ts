@@ -1,10 +1,8 @@
 import { pathToFileURL } from 'url';
 import { resolve } from 'path';
 import fs from 'fs';
-
 import pc from 'picocolors';
 import { build } from 'esbuild';
-
 import type { Config } from '../api/types';
 
 export interface LibraConfig extends Partial<Config> {

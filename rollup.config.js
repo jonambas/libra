@@ -1,7 +1,6 @@
 import { defineConfig } from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
 import cjs from '@rollup/plugin-commonjs';
-
 import pkg from './package.json';
 
 const config = defineConfig({

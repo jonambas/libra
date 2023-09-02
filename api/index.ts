@@ -1,6 +1,5 @@
 /* eslint-disable no-var */
 import { Framecast } from 'framecast';
-
 import { slugify, group } from './utils';
 import type { Entry, GroupedEntry } from './types';
 

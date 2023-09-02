@@ -10,6 +10,6 @@ describe('URL', () => {
         entry: 'root--root-story-1'
       }
     });
-    cy.url().should('include', 'entry=root--root-story-1');
+    cy.url().should('include', 'entry=root--root-story-1&scheme=');
   });
 });

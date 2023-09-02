@@ -11,7 +11,6 @@ import {
 } from 'react';
 import { Framecast } from 'framecast';
 import { useSearchParams } from 'react-router-dom';
-
 import type { GroupedEntry } from '../../../api/types';
 
 type Context = {
@@ -28,6 +27,7 @@ export const LibraContext = createContext<Context>({});
 export const LibraProvider: FC<PropsWithChildren> = (props) => {
   const [searchParams] = useSearchParams();
   const initialEntry = searchParams.get('entry');
+  const scheme = searchParams.get('scheme');
 
   const [entries, setEntries] = useState<GroupedEntry[]>([]);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -70,10 +70,10 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
     if (ready) {
       framecast?.broadcast({
         event: 'libra-entry',
-        data: { id: activeId }
+        data: { id: activeId, scheme }
       });
     }
-  }, [ready, activeId, reload]);
+  }, [ready, activeId, scheme, reload]);
 
   // Initial Load & browser navigation
   useEffect(() => {

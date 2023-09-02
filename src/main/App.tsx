@@ -2,9 +2,7 @@ import './App.css';
 import { FC, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Text } from '@sweatpants/react';
-
 import { css, cva } from '../lb-system/css';
-
 import { Navigation } from './components/Navigation';
 import { Iframe } from './components/Iframe';
 import { LibraContext, LibraProvider } from './context/libra';

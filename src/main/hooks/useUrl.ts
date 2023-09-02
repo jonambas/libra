@@ -1,6 +1,5 @@
 import { useContext, useMemo } from 'react';
 import { createSearchParams } from 'react-router-dom';
-
 import { LibraContext } from '../context/libra';
 
 interface UseUrlOptions {

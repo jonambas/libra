@@ -1,15 +1,15 @@
 import { FC, PropsWithChildren } from 'react';
 
-const defaultStyles = () => `
+const defaultStyles = (scheme?: 'light' | 'dark') => `
   #root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     padding: 16px;
     font-size: 14px;
-    background: white; 
+    background: ${scheme === 'light' ? 'white' : 'black'}; 
   }
 
   * {
-    color: black;
+    color: ${scheme === 'light' ? 'black' : 'white'};
   }
 
   h1 {
@@ -17,13 +17,13 @@ const defaultStyles = () => `
   }
 `;
 
-const DefaultLayout: FC<PropsWithChildren> = (props) => {
-  const { children } = props;
+const DefaultLayout: FC<PropsWithChildren<{ scheme?: 'light' | 'dark' }>> = (props) => {
+  const { children, scheme } = props;
 
   if (!children) {
     return (
       <>
-        <style>{defaultStyles()}</style>
+        <style>{defaultStyles(scheme)}</style>
         <div>
           <h1>Welcome to Libra!</h1>
           <p>You can customize this default view by creating a custom layout.</p>
