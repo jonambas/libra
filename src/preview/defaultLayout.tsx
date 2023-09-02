@@ -1,11 +1,11 @@
-import { FC, PropsWithChildren } from 'react';
+import type { Layout } from '../../api/types';
 
 const defaultStyles = (scheme?: 'light' | 'dark') => `
   #root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     padding: 16px;
     font-size: 14px;
-    background: ${scheme === 'light' ? 'white' : 'black'}; 
+    background: ${scheme === 'light' ? '#fcfcfd' : '#18181a'}; 
   }
 
   * {
@@ -17,9 +17,7 @@ const defaultStyles = (scheme?: 'light' | 'dark') => `
   }
 `;
 
-const DefaultLayout: FC<PropsWithChildren<{ scheme?: 'light' | 'dark' }>> = (props) => {
-  const { children, scheme } = props;
-
+const DefaultLayout: Layout = ({ children, scheme }) => {
   if (!children) {
     return (
       <>
@@ -36,7 +34,12 @@ const DefaultLayout: FC<PropsWithChildren<{ scheme?: 'light' | 'dark' }>> = (pro
     );
   }
 
-  return <>{props.children}</>;
+  return (
+    <>
+      <style>{defaultStyles(scheme)}</style>
+      {children}
+    </>
+  );
 };
 
 export default DefaultLayout;
