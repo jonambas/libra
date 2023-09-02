@@ -28,13 +28,13 @@ describe('Navigation', () => {
     cy.findByRole('link', { name: 'Preview iFrame' }).should(
       'have.attr',
       'href',
-      '/preview.html?'
+      '/preview.html?scheme=light'
     );
     cy.findAllByRole('link', { name: 'root story 1' }).click();
     cy.findByRole('link', { name: 'Preview iFrame' }).should(
       'have.attr',
       'href',
-      '/preview.html?entry=root--root-story-1'
+      '/preview.html?entry=root--root-story-1&scheme=light'
     );
   });
 });

@@ -49,7 +49,7 @@ describe('Navigation', () => {
     cy.findByRole('navigation').within(() => {
       cy.findAllByRole('link').first().click();
     });
-    cy.url().should('include', 'entry=root--root-story-1');
+    cy.url().should('include', 'entry=root--root-story-1&scheme=light');
 
     cy.findByTitle('Libra Preview')
       .its('0.contentDocument.body')
@@ -62,7 +62,7 @@ describe('Navigation', () => {
       cy.findAllByRole('button').first().click();
       cy.findAllByRole('link').first().click();
     });
-    cy.url().should('include', 'entry=root__file-2--story-1');
+    cy.url().should('include', 'entry=root__file-2--story-1&scheme=light');
 
     cy.findByTitle('Libra Preview')
       .its('0.contentDocument.body')
