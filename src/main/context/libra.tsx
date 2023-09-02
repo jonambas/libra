@@ -20,6 +20,7 @@ type Context = {
   activeId?: string;
   reloadEntry?: () => void;
   ready?: boolean;
+  scheme?: 'light' | 'dark';
 };
 
 export const LibraContext = createContext<Context>({});
@@ -27,7 +28,7 @@ export const LibraContext = createContext<Context>({});
 export const LibraProvider: FC<PropsWithChildren> = (props) => {
   const [searchParams] = useSearchParams();
   const initialEntry = searchParams.get('entry');
-  const scheme = searchParams.get('scheme');
+  const scheme = searchParams.get('scheme') as 'light' | 'dark';
 
   const [entries, setEntries] = useState<GroupedEntry[]>([]);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -90,7 +91,8 @@ export const LibraProvider: FC<PropsWithChildren> = (props) => {
         iframeRef,
         activeId,
         reloadEntry,
-        ready
+        ready,
+        scheme
       }}
     >
       {props.children}

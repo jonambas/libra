@@ -5,7 +5,7 @@ const defaultStyles = (scheme?: 'light' | 'dark') => `
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     padding: 16px;
     font-size: 14px;
-    background: ${scheme === 'light' ? '#fcfcfd' : '#18181a'}; 
+    background: ${scheme === 'light' ? '#fcfcfd' : '#18181a'};
   }
 
   * {

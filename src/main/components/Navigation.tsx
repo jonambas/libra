@@ -208,7 +208,7 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
   const url = useUrl({ id });
 
   const handleClick = useCallback<MouseEventHandler<HTMLAnchorElement>>(() => {
-    loadEntry && loadEntry(id);
+    loadEntry?.(id);
   }, [id]);
 
   if (id && searchTerm && !searchableId(id).includes(searchTerm)) {
