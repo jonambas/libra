@@ -19,7 +19,8 @@ const Index: FC = () => {
     <div
       aria-hidden={ready ? 'false' : 'true'}
       className={css({
-        display: 'flex'
+        display: 'flex',
+        bg: 'appBg'
       })}
     >
       <div

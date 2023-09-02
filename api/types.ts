@@ -1,3 +1,4 @@
+import type { FC, PropsWithChildren } from 'react';
 import type { InlineConfig } from 'vite';
 
 export type Entry = {
@@ -12,6 +13,8 @@ export type Entry = {
 export type GroupedEntry = Partial<Entry> & {
   children?: Array<GroupedEntry>;
 };
+
+export type Layout = FC<PropsWithChildren<{ scheme?: 'light' | 'dark' }>>;
 
 export interface Config {
   title?: string;

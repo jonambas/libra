@@ -26,7 +26,7 @@
   "author": "Jon Ambas <jon@jonambas.com>",
   "license": "MIT",
   "dependencies": {
-    "@sweatpants/react": "0.4.1",
+    "@sweatpants/react": "0.5.0",
     "@vitejs/plugin-react": "4.0.4",
     "classnames": "2.3.2",
     "commander": "11.0.0",
@@ -42,7 +42,7 @@
   "devDependencies": {
     "@pandacss/dev": "0.13.1",
     "@rollup/plugin-commonjs": "25.0.4",
-    "@sweatpants/panda-preset": "0.3.2",
+    "@sweatpants/panda-preset": "0.4.0",
     "@testing-library/cypress": "9.0.0",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
