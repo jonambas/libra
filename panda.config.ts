@@ -20,6 +20,7 @@ export default defineConfig({
   },
 
   prefix: 'lb',
+  hash: true,
   minify: true,
   clean: true,
 
