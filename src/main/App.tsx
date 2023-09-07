@@ -20,7 +20,7 @@ const Index: FC = () => {
       aria-hidden={ready ? 'false' : 'true'}
       className={css({
         display: 'flex',
-        bg: 'appBg'
+        bg: 'baseBg'
       })}
     >
       <div
