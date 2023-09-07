@@ -40,7 +40,7 @@
     "vite-plugin-inspect": "0.7.38"
   },
   "devDependencies": {
-    "@pandacss/dev": "0.13.1",
+    "@pandacss/dev": "0.14.0",
     "@rollup/plugin-commonjs": "25.0.4",
     "@sweatpants/panda-preset": "0.5.0",
     "@testing-library/cypress": "9.0.0",
