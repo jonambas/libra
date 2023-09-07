@@ -31,10 +31,9 @@ export const Toolbar: FC = () => {
           label="Select color scheme"
           defaultValue={colorChoice}
           onValueChange={(v) =>
-            setColorChoice && setColorChoice(v as UseColorScheme['prefers'] | 'system')
+            setColorChoice && setColorChoice(v as UseColorScheme['scheme'])
           }
         >
-          <Select.Item value="system">System</Select.Item>
           <Select.Item value="light">Light</Select.Item>
           <Select.Item value="dark">Dark</Select.Item>
         </Select>
