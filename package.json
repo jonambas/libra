@@ -42,7 +42,7 @@
   "devDependencies": {
     "@pandacss/dev": "0.13.1",
     "@rollup/plugin-commonjs": "25.0.4",
-    "@sweatpants/panda-preset": "0.4.1",
+    "@sweatpants/panda-preset": "0.5.0",
     "@testing-library/cypress": "9.0.0",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
