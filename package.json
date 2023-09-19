@@ -30,7 +30,7 @@
     "@vitejs/plugin-react": "4.0.4",
     "classnames": "2.3.2",
     "commander": "11.0.0",
-    "esbuild": "0.19.2",
+    "esbuild": "0.19.3",
     "fast-glob": "3.3.1",
     "framecast": "0.0.5",
     "picocolors": "1.0.0",
