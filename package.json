@@ -45,7 +45,7 @@
     "@sweatpants/panda-preset": "0.5.0",
     "@testing-library/cypress": "9.0.0",
     "@types/node": "20.6.2",
-    "@types/react": "18.2.21",
+    "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "@typescript-eslint/eslint-plugin": "6.6.0",
     "@typescript-eslint/parser": "6.6.0",
