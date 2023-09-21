@@ -177,7 +177,7 @@ const Item: FC<
         kind="bare"
         size="xs"
         onClick={() => setOpen(!shouldBeOpen)}
-        className={css({ w: '100%', marginBottom: '2' })}
+        className={css({ w: '100%', marginBottom: '2', color: 'gray12!' })}
       >
         <Folder
           style={{
@@ -229,6 +229,7 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
             display: 'block!',
             marginBottom: '2',
             overflow: 'hidden',
+            color: 'gray12!',
             _after: {
               content: '""',
               position: 'absolute',
