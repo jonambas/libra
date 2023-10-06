@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@pandacss/dev": "0.15.5",
-    "@rollup/plugin-commonjs": "25.0.4",
+    "@rollup/plugin-commonjs": "25.0.5",
     "@sweatpants/panda-preset": "0.7.0",
     "@testing-library/cypress": "9.0.0",
     "@types/node": "20.8.2",
