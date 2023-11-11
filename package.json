@@ -1,6 +1,6 @@
 {
   "name": "@sweatpants/libra",
-  "version": "0.0.30",
+  "version": "0.0.31-preview.4",
   "description": "",
   "publishConfig": {
     "access": "public"
@@ -10,6 +10,16 @@
   "bin": {
     "libra": "dist/cli.mjs"
   },
+  "files": [
+    "assets",
+    "api",
+    "dist",
+    "lib",
+    "src",
+    "types",
+    "index.html",
+    "preview.html"
+  ],
   "scripts": {
     "build": "rimraf dist && rollup -c && npm run prepare:panda",
     "build:w": "rimraf dist && rollup -c -w",

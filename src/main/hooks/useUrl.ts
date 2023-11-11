@@ -1,38 +1,18 @@
-import { useContext, useMemo } from 'react';
-import { createSearchParams } from 'react-router-dom';
-import { LibraContext } from '../context/libra';
+import { useColorScheme } from '@sweatpants/react';
 
 interface UseUrlOptions {
   preview?: boolean;
   id?: string;
 }
 
-const filterObject = (obj: Record<string, any>) => {
-  return Object.keys(obj).reduce((acc, key) => {
-    if (obj[key]) {
-      return { ...acc, [key]: obj[key] };
-    }
-    return acc;
-  }, {});
-};
-
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
-  const { activeId, scheme } = useContext(LibraContext);
+  const [scheme] = useColorScheme();
 
-  const params = useMemo(
-    () =>
-      createSearchParams(
-        new URLSearchParams(
-          filterObject({
-            entry: id || activeId,
-            scheme
-          })
-        )
-      ),
-    [id, activeId, scheme]
-  );
+  const params = new URLSearchParams({
+    ...(id ? { entry: id } : {}),
+    ...(scheme ? { scheme: scheme } : {})
+  }).toString();
 
   const path = preview ? '/preview.html' : '/';
-
   return `${path}?${params}`;
 };
