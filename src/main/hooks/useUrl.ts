@@ -1,5 +1,4 @@
 import { useContext, useMemo } from 'react';
-import { createSearchParams } from 'react-router-dom';
 import { LibraContext } from '../context/libra';
 
 interface UseUrlOptions {
@@ -7,30 +6,15 @@ interface UseUrlOptions {
   id?: string;
 }
 
-const filterObject = (obj: Record<string, any>) => {
-  return Object.keys(obj).reduce((acc, key) => {
-    if (obj[key]) {
-      return { ...acc, [key]: obj[key] };
-    }
-    return acc;
-  }, {});
-};
-
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
   const { activeId, scheme } = useContext(LibraContext);
 
-  const params = useMemo(
-    () =>
-      createSearchParams(
-        new URLSearchParams(
-          filterObject({
-            entry: id || activeId,
-            scheme
-          })
-        )
-      ),
-    [id, activeId, scheme]
-  );
+  const params = useMemo(() => {
+    return new URLSearchParams({
+      entry: (id || activeId) ?? '',
+      scheme: scheme ?? ''
+    }).toString();
+  }, [id, activeId, scheme]);
 
   const path = preview ? '/preview.html' : '/';
 
