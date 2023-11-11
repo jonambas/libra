@@ -13,13 +13,23 @@ describe('Preview', () => {
     cy.findByText('root story 1').should('exist');
   });
 
-  it('should render a color scheme', () => {
+  it('should render a dark color scheme with default layout', () => {
     cy.visit('http://localhost:8080/preview.html', {
       qs: {
         entry: 'root--root-story-1',
         scheme: 'dark'
       }
     });
-    cy.get('html').should('have.attr', 'data-color-scheme', 'dark');
+    cy.get('#root').should('have.css', 'background-color', 'rgb(24, 24, 26)');
+  });
+
+  it('should render a light color scheme with default layout', () => {
+    cy.visit('http://localhost:8080/preview.html', {
+      qs: {
+        entry: 'root--root-story-1',
+        scheme: 'light'
+      }
+    });
+    cy.get('#root').should('have.css', 'background-color', 'rgb(255, 255, 255)');
   });
 });

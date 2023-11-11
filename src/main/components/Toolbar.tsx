@@ -1,5 +1,5 @@
 import { FC, useContext } from 'react';
-import { Button, ButtonGroup, UseColorScheme, Select } from '@sweatpants/react';
+import { Button, ButtonGroup, ColorSchemeContextValue, Select } from '@sweatpants/react';
 import { Open } from '../icons';
 import { css } from '../../lb-system/css';
 import { SettingsContext } from '../context/settings';
@@ -29,9 +29,9 @@ export const Toolbar: FC = () => {
           hideChevron
           hideLabel
           label="Select color scheme"
-          defaultValue={colorChoice}
+          value={colorChoice}
           onValueChange={(v) =>
-            setColorChoice && setColorChoice(v as UseColorScheme['scheme'])
+            setColorChoice && setColorChoice(v as ColorSchemeContextValue[0])
           }
         >
           <Select.Item value="light">Light</Select.Item>

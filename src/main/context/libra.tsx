@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { Framecast } from 'framecast';
 import { useSearchParams } from 'react-router-dom';
+import { useColorScheme } from '@sweatpants/react';
 import type { GroupedEntry } from '../../../api/types';
 
 type Context = {
@@ -28,7 +29,7 @@ export const LibraContext = createContext<Context>({});
 export const LibraProvider: FC<PropsWithChildren> = (props) => {
   const [searchParams] = useSearchParams();
   const initialEntry = searchParams.get('entry');
-  const scheme = searchParams.get('scheme') as 'light' | 'dark';
+  const [scheme] = useColorScheme();
 
   const [entries, setEntries] = useState<GroupedEntry[]>([]);
   const iframeRef = useRef<HTMLIFrameElement>(null);
