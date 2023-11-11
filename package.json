@@ -36,7 +36,7 @@
     "picocolors": "1.0.0",
     "react-error-boundary": "3.1.4",
     "react-router-dom": "6.16.0",
-    "vite": "4.4.9",
+    "vite": "4.5.0",
     "vite-plugin-inspect": "0.7.38"
   },
   "devDependencies": {
