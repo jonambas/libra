@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { LibraContext } from '../context/libra';
 
 interface UseUrlOptions {
@@ -8,15 +8,13 @@ interface UseUrlOptions {
 
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
   const { activeId, scheme } = useContext(LibraContext);
+  console.log(activeId, id, scheme);
 
-  const params = useMemo(() => {
-    return new URLSearchParams({
-      entry: (id || activeId) ?? '',
-      scheme: scheme ?? ''
-    }).toString();
-  }, [id, activeId, scheme]);
+  const params = new URLSearchParams({
+    entry: (id || activeId) ?? '',
+    scheme: scheme ?? ''
+  }).toString();
 
   const path = preview ? '/preview.html' : '/';
-
   return `${path}?${params}`;
 };
