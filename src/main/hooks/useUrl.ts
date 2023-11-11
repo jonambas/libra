@@ -7,7 +7,6 @@ interface UseUrlOptions {
 
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
   const [scheme] = useColorScheme();
-  console.log(id, scheme);
 
   const params = new URLSearchParams({
     entry: id ?? '',

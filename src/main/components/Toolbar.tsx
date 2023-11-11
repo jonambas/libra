@@ -12,7 +12,7 @@ export const Toolbar: FC = () => {
   const { activeId } = useContext(LibraContext);
 
   const url = useUrl({ id: activeId, preview: true });
-  console.log(url);
+
   return (
     <div
       className={css({
