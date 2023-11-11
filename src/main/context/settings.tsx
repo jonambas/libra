@@ -7,14 +7,14 @@ import {
   useState
 } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { UseColorScheme, useColorScheme } from '@sweatpants/react';
+import { ColorSchemeContextValue, useColorScheme } from '@sweatpants/react';
 import { LibraContext } from './libra';
 
 type SettingsContext = {
   hideSidebar: boolean;
   toggleSidebar: () => void;
-  colorChoice: UseColorScheme['scheme'] | 'system';
-  setColorChoice: (choide: UseColorScheme['scheme']) => void;
+  colorChoice: ColorSchemeContextValue[0] | 'system';
+  setColorChoice: (choide: ColorSchemeContextValue[0]) => void;
 };
 
 export const SettingsContext = createContext<Partial<SettingsContext>>({});
@@ -23,8 +23,7 @@ export const SettingsProvider: FC<PropsWithChildren> = (props) => {
   const { activeId } = useContext(LibraContext);
   const [hideSidebar, toggleSidebar] = useState<boolean>(false);
 
-  const [prefers, setPrefers] = useColorScheme({ setHtmlAttribute: true });
-
+  const [scheme, setScheme] = useColorScheme();
   const [, setSearchParams] = useSearchParams();
 
   // Updates query params when entry changes
@@ -32,19 +31,19 @@ export const SettingsProvider: FC<PropsWithChildren> = (props) => {
     setSearchParams(
       {
         entry: activeId ?? '',
-        scheme: prefers ?? ''
+        scheme: scheme ?? ''
       },
       { replace: true }
     );
-  }, [activeId, prefers]);
+  }, [activeId, scheme]);
 
   return (
     <SettingsContext.Provider
       value={{
         hideSidebar,
         toggleSidebar: () => toggleSidebar(!hideSidebar),
-        colorChoice: prefers,
-        setColorChoice: setPrefers
+        colorChoice: scheme,
+        setColorChoice: setScheme
       }}
     >
       {props.children}

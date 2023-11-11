@@ -1,7 +1,13 @@
 import './App.css';
 import { FC, useContext } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Text } from '@sweatpants/react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useSearchParams
+} from 'react-router-dom';
+import { ColorSchemeProvider, Text } from '@sweatpants/react';
 import { css, cva } from '../lb-system/css';
 import { Navigation } from './components/Navigation';
 import { Iframe } from './components/Iframe';
@@ -20,7 +26,7 @@ const Index: FC = () => {
       aria-hidden={ready ? 'false' : 'true'}
       className={css({
         display: 'flex',
-        bg: 'baseBg'
+        bg: { base: '#fff', _darkScheme: 'baseBg' }
       })}
     >
       <div
@@ -83,20 +89,26 @@ const Index: FC = () => {
   );
 };
 
+export const Providers: FC = () => {
+  const [params] = useSearchParams();
+  const defaultScheme = (params.get('scheme') as 'light' | 'dark') ?? undefined;
+
+  return (
+    <ColorSchemeProvider setHtmlAttribute defaultScheme={defaultScheme}>
+      <LibraProvider>
+        <SettingsProvider>
+          <Index />
+        </SettingsProvider>
+      </LibraProvider>
+    </ColorSchemeProvider>
+  );
+};
+
 export const App: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <LibraProvider>
-              <SettingsProvider>
-                <Index />
-              </SettingsProvider>
-            </LibraProvider>
-          }
-        />
+        <Route path="/" element={<Providers />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

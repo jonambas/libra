@@ -1,10 +1,9 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { createRoot } from 'react-dom/client';
 // eslint-disable-next-line import/no-unresolved
 import Layout from '__LIBRA_LAYOUT__'; // User's layout
 // eslint-disable-next-line import/no-unresolved
 import 'virtual:libra-entries'; // Initilizes entries
-import { useColorScheme } from '@sweatpants/react';
 import { instance } from '../../api';
 import { useLibraPreview } from './useLibraPreview';
 import { Boundary } from './error';
@@ -46,11 +45,6 @@ const Entry: FC<EntryProps> = (props) => {
 
 const Preview: FC = () => {
   const preview = useLibraPreview();
-  const [, setPrefers] = useColorScheme({ setHtmlAttribute: true });
-
-  useEffect(() => {
-    preview.scheme && setPrefers(preview.scheme);
-  }, [preview.scheme]);
 
   return (
     <Boundary>
