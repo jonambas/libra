@@ -16,7 +16,9 @@
     "dist",
     "lib",
     "src",
-    "types"
+    "types",
+    "index.html",
+    "preview.html"
   ],
   "scripts": {
     "build": "rimraf dist && rollup -c && npm run prepare:panda",
