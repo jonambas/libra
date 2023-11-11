@@ -9,8 +9,8 @@ export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
   const [scheme] = useColorScheme();
 
   const params = new URLSearchParams({
-    entry: id ?? '',
-    scheme: scheme ?? ''
+    ...(id ? { entry: id } : {}),
+    ...(scheme ? { scheme: scheme } : {})
   }).toString();
 
   const path = preview ? '/preview.html' : '/';
