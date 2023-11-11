@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { LibraContext } from '../context/libra';
+import { useColorScheme } from '@sweatpants/react';
 
 interface UseUrlOptions {
   preview?: boolean;
@@ -7,11 +6,11 @@ interface UseUrlOptions {
 }
 
 export const useUrl = ({ preview, id }: UseUrlOptions = {}): string => {
-  const { activeId, scheme } = useContext(LibraContext);
-  console.log(activeId, id, scheme);
+  const [scheme] = useColorScheme();
+  console.log(id, scheme);
 
   const params = new URLSearchParams({
-    entry: (id || activeId) ?? '',
+    entry: id ?? '',
     scheme: scheme ?? ''
   }).toString();
 

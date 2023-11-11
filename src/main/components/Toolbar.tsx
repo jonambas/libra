@@ -4,13 +4,15 @@ import { Open } from '../icons';
 import { css } from '../../lb-system/css';
 import { SettingsContext } from '../context/settings';
 import { useUrl } from '../hooks/useUrl';
+import { LibraContext } from '../context/libra';
 
 export const Toolbar: FC = () => {
   const { hideSidebar, toggleSidebar, setColorChoice, colorChoice } =
     useContext(SettingsContext);
+  const { activeId } = useContext(LibraContext);
 
-  const url = useUrl({ preview: true });
-
+  const url = useUrl({ id: activeId, preview: true });
+  console.log(url);
   return (
     <div
       className={css({
