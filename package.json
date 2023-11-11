@@ -10,6 +10,14 @@
   "bin": {
     "libra": "dist/cli.mjs"
   },
+  "files": [
+    "assets",
+    "api",
+    "dist",
+    "lib",
+    "src",
+    "types"
+  ],
   "scripts": {
     "build": "rimraf dist && rollup -c && npm run prepare:panda",
     "build:w": "rimraf dist && rollup -c -w",
