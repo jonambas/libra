@@ -26,5 +26,7 @@ export interface Config {
   viteConfig?: () => InlineConfig;
 }
 
+export type DefineConfig = (config: Config) => Config;
+
 export type Add = (name: string, render: () => JSX.Element) => void;
 export type Directory = (name: string, callback: () => void) => void;

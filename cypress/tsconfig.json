@@ -1,6 +1,5 @@
 {
-  "include": ["lib/index.ts", "src", "api", "types/libra-env.d.ts", "styled-system"],
-  "exclude": ["dist", "node_modules", "tests", "cypress"],
+  "include": ["e2e"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "baseUrl": ".",
@@ -17,6 +16,6 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "vite"]
+    "types": ["vite/client", "vite", "cypress", "@testing-library/cypress"]
   }
 }

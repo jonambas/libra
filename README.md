@@ -47,16 +47,15 @@ Add these two scripts to run libra in your `package.json` file.
 
 ### Configuring Libra
 
-Create a `libra.config.js` file at the root of your project
+Create a `libra.config.ts` file at the root of your project
 
 ```js
-/**
- * @type {import('@sweatpants/libra').Config}
- */
-export default {
+import { defineConfig } from '@sweatpants/libra/config';
+
+export default defineConfig({
   title: 'Example Title',
   port: 8080
-};
+});
 ```
 
 ### Config Options

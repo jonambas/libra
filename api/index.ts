@@ -146,7 +146,9 @@ export const instance = Libra.getInstance();
 declare global {
   var add: typeof instance.add;
   var directory: typeof instance.directory;
+  var describe: typeof instance.directory;
 }
 
 globalThis.add = instance.add;
 globalThis.directory = instance.directory;
+globalThis.describe = instance.directory;

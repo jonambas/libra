@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import fs from 'fs';
 import pc from 'picocolors';
 import { build } from 'esbuild';
+import fg from 'fast-glob';
 import type { Config } from '../api/types';
 
 export interface LibraConfig extends Partial<Config> {
@@ -19,7 +20,8 @@ const dynamicImport = new Function('file', 'return import(file)');
  */
 export const resolveConfig = async (cwd: string): Promise<Partial<LibraConfig>> => {
   try {
-    const configPath = resolve(cwd, 'libra.config.js');
+    const configPaths = await fg(resolve(cwd, 'libra.config.{ts,js,mjs,cjs}'));
+    const configPath = configPaths[0];
 
     if (!fs.existsSync(configPath)) {
       console.log(

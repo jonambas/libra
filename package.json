@@ -5,8 +5,26 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "api/index.ts",
-  "types": "api/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./api/index.d.ts",
+      "default": "./api/index.ts"
+    },
+    "./config": {
+      "types": "./api/config.d.ts",
+      "default": "./api/config.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "config": [
+        "./api/config.d.ts"
+      ],
+      "*": [
+        "./api/index.d.ts"
+      ]
+    }
+  },
   "bin": {
     "libra": "dist/cli.mjs"
   },
