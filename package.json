@@ -47,7 +47,7 @@
     "react-error-boundary": "3.1.4",
     "react-router-dom": "6.16.0",
     "vite": "4.5.0",
-    "vite-plugin-inspect": "0.7.38"
+    "vite-plugin-inspect": "0.7.42"
   },
   "devDependencies": {
     "@pandacss/dev": "0.18.2",
