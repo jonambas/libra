@@ -15,7 +15,7 @@
       "jsx": true
     }
   },
-  "ignorePatterns": ["**/dist", "**/*.d.ts"],
+  "ignorePatterns": ["**/dist", "**/*.d.ts", "tests"],
   "plugins": ["@typescript-eslint"],
   "settings": {
     "import/resolver": {

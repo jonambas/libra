@@ -1,6 +1,6 @@
 describe('Navigation', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080');
+    cy.visit('http://localhost:9001');
   });
 
   it('should render title', () => {

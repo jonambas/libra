@@ -1,4 +1,4 @@
-import type { Layout } from '../../api/types';
+import type { LibraLayout } from '../../api/types';
 
 const defaultStyles = (scheme?: 'light' | 'dark') => `
   #root {
@@ -17,7 +17,7 @@ const defaultStyles = (scheme?: 'light' | 'dark') => `
   }
 `;
 
-const DefaultLayout: Layout = ({ children, scheme }) => {
+const DefaultLayout: LibraLayout = ({ children, scheme }) => {
   if (!children) {
     return (
       <>
