@@ -46,7 +46,7 @@
     "lint:ci": "npm run prepare:panda && eslint . --max-warnings 0",
     "prepare:test": "npm run prepare:panda && npm run build && cd tests/react-18 && npm ci",
     "test": "cd tests/react-18 && npm run preview & cypress open",
-    "test:ci": "cd tests/react-18 && npm run preview & wait-on http://localhost:8080 && cypress run"
+    "test:ci": "cd tests/react-18 && npm run preview & wait-on http://localhost:9001 && cypress run"
   },
   "keywords": [
     "react"
