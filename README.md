@@ -62,28 +62,44 @@ export default defineConfig({
 
 #### `title?: string`
 
-Sets the page title
+Sets the page title. Defaults to `"Libra"`.
 
 #### `port?: number`
 
-Which port to run the local dev server in
+Sets the port to run the local development server with `libra start`. Defaults to `9000`.
 
 #### `open?: boolean`
 
-Opens a browser window when running start
+Opens a browser window when running the local development server with `libra start`. Defaults to `false`.
 
 #### `inspect?: boolean`
 
-Enables vite-plugin-inspect
+Enables [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect).
 
 #### `layout?: string`
 
-Path to a default layout component
+Specifies the file path to a custom layout for all Libra component pages.
+
+Example layout file:
+
+```tsx
+import type { LibraLayout } from '@sweatpants/libra';
+
+const Layout: LibraLayout = ({ children, scheme }) => {
+  if (!children) {
+    return <>This will render on the home page when no entry is active.</>;
+  }
+
+  return <>{children}</>;
+};
+
+export default Layout;
+```
 
 #### `outDir?: string`
 
-Output directory for the build command
+Sets the output directory for `libra build`. Defaults to `"dist/libra"`.
 
-#### `viteConfig?: ()=> InlineConfig`
+#### `viteConfig?: () => UserConfig`
 
-Any additional configuration you want to pass to
+Used to modify [Vite's config](https://vitejs.dev/config/).

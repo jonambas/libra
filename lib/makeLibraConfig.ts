@@ -25,9 +25,7 @@ export const resolveConfig = async (cwd: string): Promise<Partial<LibraConfig>> 
 
     if (!fs.existsSync(configPath)) {
       console.log(
-        pc.red(
-          '\nConfig file (libra.config.js) not found. Using default Libra settings\n'
-        )
+        pc.red('\nLibra config file not found. Using default Libra settings\n')
       );
       return {};
     }
@@ -60,7 +58,7 @@ export const resolveConfig = async (cwd: string): Promise<Partial<LibraConfig>> 
 
 export const makeLibraConfig = async (cliConfig: LibraConfig): Promise<LibraConfig> => {
   const defaults: Config = {
-    port: 8080,
+    port: 9000,
     open: false,
     outDir: 'dist/libra',
     title: 'Libra'

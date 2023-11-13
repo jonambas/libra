@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import type { InlineConfig } from 'vite';
+import type { UserConfig } from 'vite';
 
 export type Entry = {
   group: string;
@@ -14,16 +14,44 @@ export type GroupedEntry = Partial<Entry> & {
   children?: Array<GroupedEntry>;
 };
 
-export type Layout = FC<PropsWithChildren<{ scheme?: 'light' | 'dark' }>>;
+export type LibraLayout = FC<PropsWithChildren<{ scheme?: 'light' | 'dark' }>>;
 
 export interface Config {
+  /**
+   * Sets the page title.
+   * @default 'Libra'
+   */
   title?: string;
+  /**
+   * Sets the port to run the local development server.
+   * @default 9000
+   */
   port?: number;
+  /**
+   * Opens a browser window automatically when set to `true`.
+   * @default false
+   */
   open?: boolean;
+  /**
+   * Enables `vite-plugin-inspect`
+   * @see https://github.com/antfu/vite-plugin-inspect
+   * @default false
+   */
   inspect?: boolean;
+  /**
+   * Specifies the file path to a custom layout for all Libra component pages.
+   */
   layout?: string;
+  /**
+   * Sets the output directory for `libra build`.
+   * @default 'dist/libra'
+   */
   outDir?: string;
-  viteConfig?: () => InlineConfig;
+  /**
+   * Used to modify Vite config.
+   * @see https://vitejs.dev/config/
+   */
+  viteConfig?: () => UserConfig;
 }
 
 export type DefineConfig = (config: Config) => Config;
