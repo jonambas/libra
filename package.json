@@ -89,6 +89,6 @@
     "rollup": "2.79.1",
     "rollup-plugin-esbuild": "6.1.0",
     "typescript": "5.2.2",
-    "wait-on": "7.0.1"
+    "wait-on": "7.2.0"
   }
 }
