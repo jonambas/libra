@@ -54,7 +54,7 @@
   "author": "Jon Ambas <jon@jonambas.com>",
   "license": "MIT",
   "dependencies": {
-    "@sweatpants/react": "0.7.20",
+    "@sweatpants/react": "0.7.21",
     "@vitejs/plugin-react": "4.1.1",
     "classnames": "2.3.2",
     "commander": "11.0.0",
@@ -64,13 +64,13 @@
     "picocolors": "1.0.0",
     "react-error-boundary": "3.1.4",
     "react-router-dom": "6.16.0",
-    "vite": "4.5.0",
+    "vite": "4.5.1",
     "vite-plugin-inspect": "0.7.42"
   },
   "devDependencies": {
     "@pandacss/dev": "0.22.1",
     "@rollup/plugin-commonjs": "25.0.5",
-    "@sweatpants/panda-preset": "0.7.4",
+    "@sweatpants/panda-preset": "0.7.5",
     "@testing-library/cypress": "9.0.0",
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",

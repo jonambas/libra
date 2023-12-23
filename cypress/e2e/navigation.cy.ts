@@ -49,7 +49,13 @@ describe('Navigation', () => {
     cy.findByRole('navigation').within(() => {
       cy.findAllByRole('link').first().click();
     });
-    cy.url().should('include', 'entry=root--root-story-1&scheme=light');
+
+    cy.get('html').then((el) => {
+      cy.url().should(
+        'include',
+        `entry=root--root-story-1&scheme=${el.data('color-scheme')}`
+      );
+    });
 
     cy.findByTitle('Libra Preview')
       .its('0.contentDocument.body')
@@ -62,7 +68,13 @@ describe('Navigation', () => {
       cy.findAllByRole('button').first().click();
       cy.findAllByRole('link').first().click();
     });
-    cy.url().should('include', 'entry=root__file-2--story-1&scheme=light');
+
+    cy.get('html').then((el) => {
+      cy.url().should(
+        'include',
+        `entry=root__file-2--story-1&scheme=${el.data('color-scheme')}`
+      );
+    });
 
     cy.findByTitle('Libra Preview')
       .its('0.contentDocument.body')
