@@ -17,7 +17,6 @@ export const Toolbar: FC = () => {
     <div
       className={css({
         padding: '4',
-        mt: '20px',
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center'
