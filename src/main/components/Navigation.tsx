@@ -29,7 +29,7 @@ export const Navigation: FC = () => {
     [entries, searchTerm]
   );
 
-  if (!entries) {
+  if (!entries || !entries?.length) {
     return null;
   }
 
