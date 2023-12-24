@@ -60,7 +60,7 @@ const Index: FC = () => {
           {title}
         </Text>
 
-        <Navigation />
+        {ready ? <Navigation /> : null}
       </div>
       <main className={css({ display: 'flex', flexDir: 'column', flex: '1' })}>
         <Toolbar />
