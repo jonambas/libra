@@ -45,6 +45,7 @@
     "prepare:panda": "panda codegen && panda cssgen",
     "lint:ci": "npm run prepare:panda && eslint . --max-warnings 0",
     "prepare:test": "npm run prepare:panda && npm run build && cd tests/react-18 && npm ci",
+    "dev": "npm run prepare:test && cd tests/react-18 && npm start",
     "test": "cd tests/react-18 && npm run preview & cypress open",
     "test:ci": "cd tests/react-18 && npm run preview & wait-on http://localhost:9001 && cypress run"
   },
