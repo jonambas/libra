@@ -71,7 +71,7 @@
     "@pandacss/dev": "0.22.1",
     "@rollup/plugin-commonjs": "25.0.7",
     "@sweatpants/panda-preset": "0.7.5",
-    "@testing-library/cypress": "9.0.0",
+    "@testing-library/cypress": "10.0.1",
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",
     "@types/react-dom": "18.2.18",
