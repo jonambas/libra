@@ -54,7 +54,7 @@
   "author": "Jon Ambas <jon@jonambas.com>",
   "license": "MIT",
   "dependencies": {
-    "@sweatpants/react": "0.7.22",
+    "@sweatpants/react": "0.7.23",
     "@vitejs/plugin-react": "4.1.1",
     "classnames": "2.3.2",
     "commander": "11.0.0",
