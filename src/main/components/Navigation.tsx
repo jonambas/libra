@@ -8,7 +8,7 @@ import {
   useEffect
 } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, TextField } from '@sweatpants/react';
+import { Button, Text, TextField } from '@sweatpants/react';
 import { LibraContext } from '../context/libra';
 import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
@@ -50,6 +50,7 @@ export const Navigation: FC = () => {
           hideLabel
           value={searchTerm}
           size="sm"
+          spellCheck="false"
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
@@ -64,7 +65,11 @@ export const Navigation: FC = () => {
           paddingBottom: '8'
         })}
       >
-        {empty && <span className={css({ fontSize: '4' })}>No Results</span>}
+        {empty && (
+          <Text element="p" looksLike="p" muted>
+            No Results
+          </Text>
+        )}
         {entries.map((entry, i) => {
           return <Item key={i} {...entry} searchTerm={searchTerm.trim().toLowerCase()} />;
         })}
@@ -247,6 +252,7 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
           variants: {
             selected: {
               true: {
+                pointerEvents: 'none',
                 paddingLeft: '6!',
                 _after: { left: '5px', opacity: 1 }
               },
