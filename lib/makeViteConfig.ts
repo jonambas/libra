@@ -55,6 +55,14 @@ export const makeViteConfig = async (
         input: {
           main: resolve(dirname, 'index.html'),
           preview: resolve(dirname, 'preview.html')
+        },
+        // Supresses module directive warning
+        // See https://github.com/rollup/rollup/issues/4699
+        onwarn: (warning, warn) => {
+          if (warning.code === 'THIS_IS_UNDEFINED') {
+            return;
+          }
+          return warn;
         }
       }
     },
