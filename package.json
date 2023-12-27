@@ -2,6 +2,7 @@
   "name": "@sweatpants/libra",
   "version": "0.0.37",
   "description": "",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
@@ -87,7 +88,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rimraf": "5.0.5",
-    "rollup": "2.79.1",
+    "rollup": "4.9.1",
     "rollup-plugin-esbuild": "6.1.0",
     "typescript": "5.2.2",
     "wait-on": "7.2.0"

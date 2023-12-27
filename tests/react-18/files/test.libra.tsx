@@ -1,3 +1,5 @@
+import { ClientComponent } from './component';
+
 directory('folder 1', () => {
   add('story 1', () => {
     return <div>folder 1 story 1</div>;
@@ -28,4 +30,8 @@ add('root story 1', () => {
 
 add('root story 2', () => {
   return <div>root story 2</div>;
+});
+
+add('client component', () => {
+  return <ClientComponent />;
 });
