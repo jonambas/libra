@@ -9,10 +9,10 @@ describe('Navigation', () => {
 
   it('should render nav items', () => {
     cy.findByRole('navigation').within(() => {
-      cy.findAllByRole('link').should('have.length', 2);
+      cy.findAllByRole('link').should('have.length', 3);
       cy.findAllByRole('button').should('have.length', 2);
       cy.findAllByRole('link').first().should('have.text', 'root story 1');
-      cy.findAllByRole('link').last().should('have.text', 'root story 2');
+      cy.findAllByRole('link').last().should('have.text', 'client component');
       cy.findAllByRole('button').first().should('have.text', 'file 2');
     });
   });
@@ -20,7 +20,7 @@ describe('Navigation', () => {
   it('should expand a folder', () => {
     cy.findByRole('navigation').within(() => {
       cy.findAllByRole('button').first().click();
-      cy.findAllByRole('link').should('have.length', 5);
+      cy.findAllByRole('link').should('have.length', 6);
       cy.findAllByRole('button').should('have.length', 2);
     });
   });
