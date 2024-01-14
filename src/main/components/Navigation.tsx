@@ -12,7 +12,7 @@ import { Button, Text, TextField } from '@sweatpants/react';
 import { LibraContext } from '../context/libra';
 import { Folder } from '../icons';
 import { useUrl } from '../hooks/useUrl';
-import { css, cva } from '../../lb-system/css';
+import { css, cva } from '../../../styled-system/css';
 import type { Entry, GroupedEntry } from '../../../api/types';
 
 const searchableId = (id: string) => {
@@ -44,6 +44,7 @@ export const Navigation: FC = () => {
       >
         <TextField
           name="search-libra"
+          autoComplete="off"
           placeholder="Search..."
           id="search-libra"
           label="Search"
@@ -243,7 +244,7 @@ const EntryItem: FC<Partial<Entry> & { searchTerm?: string }> = (props) => {
               transform: 'translateY(-50%)',
               width: '6px',
               height: '6px',
-              bg: 'blue10',
+              bg: { base: 'blue10', _dark: 'blue12' },
               borderRadius: '50%',
               transition: '0.15s',
               opacity: 0

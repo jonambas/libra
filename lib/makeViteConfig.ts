@@ -75,7 +75,6 @@ export const makeViteConfig = async (
       exclude: [
         ...entryPaths,
         '@sweatpants/libra',
-        'lb-system/css',
         resolve(dirname, 'src/preview/defaultLayout.tsx')
       ],
       include: ['react-dom']
