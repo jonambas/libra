@@ -26,5 +26,5 @@ export default defineConfig({
   clean: true,
 
   gitignore: false,
-  watch: true // Flip this for local Libra ui development
+  watch: false // Flip this for local Libra ui development
 });
