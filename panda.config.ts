@@ -1,7 +1,6 @@
 import { defineConfig } from '@pandacss/dev';
 
 export default defineConfig({
-  logLevel: 'debug',
   // Whether to use css reset
   preflight: true,
 
