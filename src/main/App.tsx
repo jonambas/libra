@@ -1,4 +1,3 @@
-import './App.css';
 import { FC, useContext } from 'react';
 import {
   BrowserRouter,
@@ -8,12 +7,14 @@ import {
   useSearchParams
 } from 'react-router-dom';
 import { ColorSchemeProvider, Text } from '@sweatpants/react';
-import { css, cva } from '../lb-system/css';
+import { css, cva } from '../../styled-system/css';
 import { Navigation } from './components/Navigation';
 import { Iframe } from './components/Iframe';
 import { LibraContext, LibraProvider } from './context/libra';
 import { SettingsProvider, SettingsContext } from './context/settings';
 import { Toolbar } from './components/Toolbar';
+
+import './App.css';
 
 const { title } = __LIBRA__;
 
@@ -26,7 +27,7 @@ const Index: FC = () => {
       aria-hidden={ready ? 'false' : 'true'}
       className={css({
         display: 'flex',
-        bg: { base: '#fff', _darkScheme: 'baseBg' }
+        bg: { base: '#fff', _dark: 'baseBg' }
       })}
     >
       <div

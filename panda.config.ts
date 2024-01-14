@@ -1,14 +1,15 @@
 import { defineConfig } from '@pandacss/dev';
 
 export default defineConfig({
+  logLevel: 'debug',
   // Whether to use css reset
   preflight: true,
 
   // Where to look for your css declarations
-  include: ['./src/**/*.{js,jsx,ts,tsx}'],
+  include: ['./src/main/**/*.tsx'],
 
   // Files to exclude
-  exclude: ['node_modules'],
+  exclude: ['node_modules', 'tests'],
 
   // emitPackage: process.env.node_env === 'production' ? true : false,
   presets: ['@sweatpants/panda-preset'],
@@ -20,13 +21,10 @@ export default defineConfig({
   },
 
   prefix: 'lb',
-  hash: true,
-  minify: true,
+  hash: false,
+  minify: false,
   clean: true,
 
-  // The output directory for your css system
-  outdir: 'src/lb-system',
   gitignore: false,
-  watch: false, // Flip this for local Libra ui development
-  cwd: 'src'
+  watch: true // Flip this for local Libra ui development
 });
