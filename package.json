@@ -89,7 +89,7 @@
     "react-dom": "18.2.0",
     "rimraf": "5.0.5",
     "rollup": "4.9.5",
-    "rollup-plugin-esbuild": "6.1.0",
+    "rollup-plugin-esbuild": "6.1.1",
     "typescript": "5.2.2",
     "wait-on": "7.2.0"
   }
