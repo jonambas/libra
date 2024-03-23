@@ -56,7 +56,7 @@
   "author": "Jon Ambas <jon@jonambas.com>",
   "license": "MIT",
   "dependencies": {
-    "@sweatpants/react": "0.7.28",
+    "@sweatpants/react": "0.8.2",
     "@vitejs/plugin-react": "4.2.1",
     "classnames": "2.3.2",
     "commander": "11.0.0",
@@ -66,16 +66,16 @@
     "picocolors": "1.0.0",
     "react-error-boundary": "3.1.4",
     "react-router-dom": "6.16.0",
-    "vite": "5.0.10",
-    "vite-plugin-inspect": "0.8.1"
+    "vite": "5.2.4",
+    "vite-plugin-inspect": "0.8.3"
   },
   "devDependencies": {
-    "@pandacss/dev": "0.26.2",
+    "@pandacss/dev": "0.36.1",
     "@rollup/plugin-commonjs": "25.0.7",
-    "@sweatpants/panda-preset": "0.7.8",
+    "@sweatpants/panda-preset": "0.8.1",
     "@testing-library/cypress": "10.0.1",
-    "@types/node": "20.10.5",
-    "@types/react": "18.2.67",
+    "@types/node": "20.11.30",
+    "@types/react": "18.2.69",
     "@types/react-dom": "18.2.22",
     "@typescript-eslint/eslint-plugin": "6.15.0",
     "@typescript-eslint/parser": "6.15.0",
