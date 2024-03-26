@@ -37,7 +37,8 @@
     "src",
     "types",
     "index.html",
-    "preview.html"
+    "preview.html",
+    "styled-system"
   ],
   "scripts": {
     "build": "rimraf dist && rollup -c && npm run prepare:panda",
