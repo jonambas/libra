@@ -2,6 +2,14 @@
 
 Libra is a barebones, no-frills React component dev environment.
 
+---
+
+### Note
+
+Libra is a personal side project and should be considered as such. While efforts have been made to ensure functionality and reliability, it is important to note that Libra is not actively maintained or recommended for production use. Use at your own discretion.
+
+---
+
 ### Installing
 
 ```sh
