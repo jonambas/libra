@@ -75,7 +75,7 @@
     "@rollup/plugin-commonjs": "25.0.7",
     "@sweatpants/panda-preset": "0.8.1",
     "@testing-library/cypress": "10.0.1",
-    "@types/node": "20.11.30",
+    "@types/node": "20.12.7",
     "@types/react": "18.2.78",
     "@types/react-dom": "18.2.25",
     "@typescript-eslint/eslint-plugin": "6.15.0",
